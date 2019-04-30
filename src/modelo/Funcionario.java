@@ -1,18 +1,11 @@
 package modelo;
 
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * POB - Persistencia de Objetos
- * Prof. Fausto Ayres
- *
- */
 public class Funcionario extends Pessoa {
 	private String matricula;
 	private double salario;
 	
-	public Funcionario(String nome, String matricula, double salario) {
-		super(nome);
-		// TODO Auto-generated constructor stub
+	public Funcionario(String nome, String telefone, String matricula, double salario) {
+		super(nome, telefone);
 		
 		this.matricula = matricula;
 		this.salario = salario;
@@ -36,9 +29,7 @@ public class Funcionario extends Pessoa {
 
 	@Override
 	public String toString() {
-		return "Funcionario [ matricula = " + matricula + ", salario = " + salario + ", nome = " + nome + " ]";
+		return "Funcionario [matricula = " + matricula + ", salario = " + salario + ", nome = " + nome + ", telefone = " + telefone + "]";
 	}
 	
-	
-
 }
