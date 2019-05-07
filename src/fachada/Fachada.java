@@ -8,18 +8,33 @@ import java.util.List;
 
 import dao.DAO;
 import dao.DAOAluno;
+import dao.DAOCama;
+import dao.DAOFuncionario;
+import dao.DAOHospedagem;
+import dao.DAOHospede;
 import dao.DAOPessoa;
+import dao.DAOProduto;
+import dao.DAOQuarto;
 import dao.DAOTelefone;
 import modelo.Aluno;
+import modelo.Cama;
+import modelo.Funcionario;
+import modelo.Hospedagem;
+import modelo.Hospede;
 import modelo.Pessoa;
+import modelo.Produto;
 import modelo.Professor;
+import modelo.Quarto;
 import modelo.Telefone;
 
 public class Fachada {
 	private static DAOPessoa daopessoa = new DAOPessoa();  
-	private static DAOAluno daoaluno = new DAOAluno();  
-	private static DAOTelefone daotelefone = new DAOTelefone();  
-
+	private static DAOHospede daohospede = new DAOHospede();  
+	private static DAOFuncionario daofuncionario = new DAOFuncionario();
+	private static DAOCama daocama = new DAOCama();
+	private static DAOHospedagem daohospedagem = new DAOHospedagem();
+	private static DAOProduto daoproduto = new DAOProduto();
+	private static DAOQuarto daoquarto = new DAOQuarto();
 
 	public static void inicializar(){
 		DAO.open();
@@ -28,44 +43,93 @@ public class Fachada {
 		DAO.close();
 	}
 
-	public static Pessoa cadastrarPessoa(String nome) throws  Exception{
+	// CADASTRAR
+	
+	public static Pessoa cadastrarPessoa(String nome, String telefone) throws  Exception{
 		DAO.begin();	
 		Pessoa p = daopessoa.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar pessoa - pessoa ja cadastrado:" + nome);
+			throw new Exception("cadastrar pessoa - pessoa ja cadastrada: " + nome);
 
-		p = new Pessoa(nome);
+		p = new Pessoa(nome, telefone);
 		daopessoa.create(p);	
 		DAO.commit();
 		return p;
 	}	
 
-	public static Aluno cadastrarAluno(String nome, double nota) 
-			throws  Exception{
+	public static Hospede cadastrarHospede(String id, String nome, String telefone) throws  Exception{
 		DAO.begin();	
 		Pessoa p = daopessoa.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar aluno - pessoa ja cadastrado:" + nome);
+			throw new Exception("cadastrar hospede - pessoa ja cadastrado:" + nome);
 
-		p = new Aluno(nome,nota);
+		p = new Hospede(id, nome, telefone);
 		daopessoa.create(p);	
 		DAO.commit();
-		return (Aluno) p;
+		return (Hospede) p;
 	}
 
-	public static Professor cadastrarProfessor(String nome, double salario) 
-			throws  Exception{
+	public static Funcionario cadastrarFuncionario(String matricula, String nome, String telefone, double salario) throws  Exception{
 		DAO.begin();	
 		Pessoa p = daopessoa.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar professor - pessoa ja cadastrado:" + nome);
+			throw new Exception("cadastrar Funcionario - pessoa ja cadastrado:" + nome);
 
-		p = new Professor(nome,salario);
+		p = new Funcionario(matricula, nome, telefone, salario);
 		daopessoa.create(p);	
 		DAO.commit();
-		return (Professor) p;
+		return (Funcionario) p;
+	}
+	
+	public static Cama cadastrarCama(String id, String numero, String tipo) throws  Exception{
+		DAO.begin();	
+		Cama c = daocama.read(id);
+		if(c != null)
+			throw new Exception("cadastrar Cama - Cama ja cadastrado:" + c);
+
+		c = new Cama(id, numero, tipo);
+		daocama.create(c);	
+		DAO.commit();
+		return (Cama) c;
+	}
+	
+	public static Quarto cadastrarQuarto(String id, String numero) throws  Exception{
+		DAO.begin();	
+		Quarto c = daoquarto.read(id);
+		if(c != null)
+			throw new Exception("cadastrar Quarto - Quarto ja cadastrado:" + c);
+
+		c = new Quarto(id, numero);
+		daoquarto.create(c);	
+		DAO.commit();
+		return (Quarto) c;
 	}
 
+	public static Produto cadastrarProduto(String id, String nome, String descricao, double valor) throws  Exception{
+		DAO.begin();	
+		Produto p = daoproduto.read(id);
+		if(p != null)
+			throw new Exception("cadastrar Produto - Produto ja cadastrado:" + c);
+
+		p = new Produto(id, nome, descricao, valor);
+		daoproduto.create(p);	
+		DAO.commit();
+		return (Produto) p;
+	}
+	
+	public static Hospedagem cadastrarHospedagem(String id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) throws  Exception{
+		DAO.begin();	
+		Hospedagem h = daohospedagem.read(id);
+		if(h != null)
+			throw new Exception("cadastrar Hospedagem - Hospedagem ja cadastrado:" + c);
+
+		h = new Hospedagem(id, hospede, funcionario, quarto, cama);
+		daohospedagem.create(h);	
+		DAO.commit();
+		return (Hospedagem) h;
+	}
+	
+	//ADICIONAR TODO
 	public static Telefone adicionarTelefonePessoa(String nome, String numero) 
 			throws  Exception{
 		DAO.begin();	

@@ -9,17 +9,19 @@ import java.util.List;
 //import com.db4o.query.Evaluation;
 import com.db4o.query.Query;
 
+import modelo.Funcionario;
+import modelo.Hospede;
 import modelo.Pessoa;
 
-public class DAOPessoa  extends DAO<Pessoa>{
+public class DAOFuncionario  extends DAO<Funcionario>{
 
 	//Leitura POR nome 
-	public Pessoa read (Object chave) {
+	public Funcionario read (Object chave) {
 		String nome = (String) chave;
 		Query q = manager.query();
-		q.constrain(Pessoa.class);
+		q.constrain(Funcionario.class);
 		q.descend("nome").constrain(nome);
-		List<Pessoa> resultados = q.execute();
+		List<Funcionario> resultados = q.execute();
 		if (resultados.size()>0)
 			return resultados.get(0);
 		else
@@ -32,12 +34,12 @@ public class DAOPessoa  extends DAO<Pessoa>{
 	 * TODAS AS CONSULTAS DE PESSOA
 	 * 
 	 **********************************************************/
-	public  List<Pessoa> consultarPessoasPorParteNome(String caracteres) {
+	public  List<Funcionario> consultarFuncionariosPorParteNome(String caracteres) {
 		Query q = manager.query();
-		q.constrain(Pessoa.class);
+		q.constrain(Funcionario.class);
 		q.descend("nome").constrain(caracteres).like();
 		q.descend("dataCadastro").orderAscending();
-		List<Pessoa> result = q.execute(); 
+		List<Funcionario> result = q.execute(); 
 		return result;
 	}
 
@@ -49,16 +51,29 @@ public class DAOPessoa  extends DAO<Pessoa>{
 //		return result;
 //	}
 
-	public Pessoa consultarPessoaPorNumero(String n){
+	public Funcionario consultarFuncionarioPorNumero(String n){
 		Query q = manager.query();
 		q.constrain(Pessoa.class);
 		q.descend("telefone").constrain(n);
-		List<Pessoa> resultados = q.execute();
+		List<Funcionario> resultados = q.execute();
 		if(resultados.size()==0)
 			return null;
 		else
 			return resultados.get(0);
 	}
+	
+	public Funcionario consultarFuncionarioPorMatricula(String matricula) {
+		Query q = manager.query();
+		q.constrain(Hospede.class);
+		q.descend("matricula").constrain(matricula);
+		List<Funcionario> resultados = q.execute();
+		if (resultados.size()>0)
+			return resultados.get(0);
+		else
+			return null;
+	}
+	
+
 	
 }
 

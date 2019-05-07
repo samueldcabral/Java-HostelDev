@@ -9,17 +9,18 @@ import java.util.List;
 //import com.db4o.query.Evaluation;
 import com.db4o.query.Query;
 
+import modelo.Hospede;
 import modelo.Pessoa;
 
-public class DAOPessoa  extends DAO<Pessoa>{
+public class DAOHospede  extends DAO<Hospede>{
 
 	//Leitura POR nome 
-	public Pessoa read (Object chave) {
+	public Hospede read (Object chave) {
 		String nome = (String) chave;
 		Query q = manager.query();
-		q.constrain(Pessoa.class);
+		q.constrain(Hospede.class);
 		q.descend("nome").constrain(nome);
-		List<Pessoa> resultados = q.execute();
+		List<Hospede> resultados = q.execute();
 		if (resultados.size()>0)
 			return resultados.get(0);
 		else
@@ -32,12 +33,12 @@ public class DAOPessoa  extends DAO<Pessoa>{
 	 * TODAS AS CONSULTAS DE PESSOA
 	 * 
 	 **********************************************************/
-	public  List<Pessoa> consultarPessoasPorParteNome(String caracteres) {
+	public  List<Hospede> consultarHospedesPorParteNome(String caracteres) {
 		Query q = manager.query();
-		q.constrain(Pessoa.class);
+		q.constrain(Hospede.class);
 		q.descend("nome").constrain(caracteres).like();
 		q.descend("dataCadastro").orderAscending();
-		List<Pessoa> result = q.execute(); 
+		List<Hospede> result = q.execute(); 
 		return result;
 	}
 
@@ -49,15 +50,26 @@ public class DAOPessoa  extends DAO<Pessoa>{
 //		return result;
 //	}
 
-	public Pessoa consultarPessoaPorNumero(String n){
+	public Hospede consultarPessoaPorNumero(String n){
 		Query q = manager.query();
 		q.constrain(Pessoa.class);
 		q.descend("telefone").constrain(n);
-		List<Pessoa> resultados = q.execute();
+		List<Hospede> resultados = q.execute();
 		if(resultados.size()==0)
 			return null;
 		else
 			return resultados.get(0);
+	}
+	
+	public Hospede consultarHospedePorId(String id) {
+		Query q = manager.query();
+		q.constrain(Hospede.class);
+		q.descend("id").constrain(id);
+		List<Hospede> resultados = q.execute();
+		if (resultados.size()>0)
+			return resultados.get(0);
+		else
+			return null;
 	}
 	
 }
