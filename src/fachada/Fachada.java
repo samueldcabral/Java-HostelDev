@@ -109,7 +109,7 @@ public class Fachada {
 		DAO.begin();	
 		Produto p = daoproduto.read(id);
 		if(p != null)
-			throw new Exception("cadastrar Produto - Produto ja cadastrado:" + c);
+			throw new Exception("cadastrar Produto - Produto ja cadastrado:" + p);
 
 		p = new Produto(id, nome, descricao, valor);
 		daoproduto.create(p);	
@@ -117,59 +117,115 @@ public class Fachada {
 		return (Produto) p;
 	}
 	
-	public static Hospedagem cadastrarHospedagem(String id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) throws  Exception{
+	public static Hospedagem cadastrarHospedagem(String id, String hospede, String funcionario, String quarto, String cama) throws  Exception{
+	//public static Hospedagem cadastrarHospedagem(String id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) throws  Exception{
+		
 		DAO.begin();	
 		Hospedagem h = daohospedagem.read(id);
 		if(h != null)
-			throw new Exception("cadastrar Hospedagem - Hospedagem ja cadastrado:" + c);
+			throw new Exception("cadastrar Hospedagem - Hospedagem ja cadastrado:" + h);
+		
+		//(refatorar parte abaixo)
+		
+		Hospede ho = daohospede.read(hospede);
+		if(ho == null)
+			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + ho);
+		
+		Funcionario f = daofuncionario.read(funcionario);
+		if(f == null)
+			throw new Exception("cadastrar hospedagem - Funcionario nao cadastrado!: " + f);
+		
+		Quarto q = daoquarto.read(quarto);
+		if(q == null)
+			throw new Exception("cadastrar hospedagem - Quarto nao cadastrado!: " + q);
+		
+		Cama c = daocama.read(cama);
+		if(c == null)
+			throw new Exception("cadastrar hospedagem - Cama nao cadastrado!: " + c);
 
-		h = new Hospedagem(id, hospede, funcionario, quarto, cama);
+		//(ate aqui)
+		h = new Hospedagem(id, ho, f, q, c);
+		ho.adicionarHospedagem(h);
+
 		daohospedagem.create(h);	
 		DAO.commit();
 		return (Hospedagem) h;
 	}
 	
-	//ADICIONAR TODO
-	public static Telefone adicionarTelefonePessoa(String nome, String numero) 
-			throws  Exception{
-		DAO.begin();	
-		Pessoa p = daopessoa.read(nome);
-		if(p == null)
-			throw new Exception("adicionar telefone - pessoa nao cadastrada:" + nome);
-
-		Telefone t = daotelefone.read(numero);
-		if(t != null)
-			throw new Exception("adicionar telefone - telefone ja cadastrado:" + nome);
-
-		t = new Telefone(numero);
-		p.adicionar(t);
-		daopessoa.update(p);	
+	//ADICIONAR 
+	
+	public static Cama adicionarCamaQuarto(String idCama, String idQuarto) throws Exception {
+		DAO.begin();
+		Cama c = daocama.read(idCama);
+		if(c == null)
+			throw new Exception("adicionar cama - cama nao cadastrada: " + idCama);
+		
+		Quarto q = daoquarto.read(idQuarto);
+		if(q == null)
+			throw new Exception("adicionar quarto - quarto nao cadastrado: " + idQuarto);
+		
+		q.adicionarCama(c);
+		c.setQuarto(q);
+		daoquarto.update(q);
 		DAO.commit();
-		return t;
+		return c;
+	}
+	
+	public static Cama excluirCamaQuarto(String idCama, String idQuarto) throws Exception {
+		DAO.begin();
+		Cama c = daocama.read(idCama);
+		if(c == null)
+			throw new Exception("excluir cama quarto- cama nao cadastrada: " + idCama);
+		
+		Quarto q = daoquarto.read(idQuarto);
+		if(q == null)
+			throw new Exception("excluir cama quarto - quarto nao cadastrado: " + idQuarto);
+		
+		c = q.localizarCama(c);
+		
+		if(c == null)
+			throw new Exception("excluir cama quarto - quarto nao tem cama: " + q.getId());
+		
+		q.remover(c);
+		daoquarto.update(q);
+		DAO.commit();
+		return c;
+	}
+	
+	public static Produto adicionarProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
+		DAO.begin();
+		Hospedagem h = daohospedagem.read(idHospedagem);
+		if(h == null)
+			throw new Exception("adicionarProdutoHospedagem - Hospedagem nao existe:" + idHospedagem);
+		
+		Produto p = daoproduto.read(nomeProduto);
+		if(p == null)
+			throw new Exception("adicionarProdutoHospedagem - Produto nao existe:" + nomeProduto);
+		
+		h.setProdutos(p);
+		daohospedagem.update(h);
+		DAO.commit();
+		return p;
+	}
+	
+	public static Produto removerProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
+		DAO.begin();
+		Hospedagem h = daohospedagem.read(idHospedagem);
+		if(h == null)
+			throw new Exception("removerProdutoHospedagem - Hospedagem nao existe:" + idHospedagem);
+		
+		Produto p = daoproduto.read(nomeProduto);
+		if(p == null)
+			throw new Exception("removerProdutoHospedagem - Produto nao existe:" + nomeProduto);
+		
+		h.removerProduto(p);
+		daohospedagem.update(h);
+		DAO.commit();
+		return p;
 	}
 
-	public static Telefone excluirTelefonePessoa(String nome, String numero) 
-			throws  Exception{
-		DAO.begin();	
-		Pessoa p = daopessoa.read(nome);
-		if(p == null)
-			throw new Exception("excluir telefone - pessoa nao cadastrada:" + nome);
-
-		Telefone t = daotelefone.read(numero);
-		if(t == null)
-			throw new Exception("excluir telefone - telefone nao cadastrado:" + nome);
-
-		t = p.localizar(numero);
-		if(t == null)
-			throw new Exception("excluir telefone - pessoa nao possui este telefone:" + nome);
-
-		p.remover(t);
-		daopessoa.update(p);	
-		daotelefone.delete(t);	//excluir orfao
-		DAO.commit();
-		return t;
-	}
-
+	// ALTERAR (TO DO)
+	
 	public static void alterarPessoa(String nome, String novonome) throws Exception{
 		DAO.begin();		
 		Pessoa p = daopessoa.read(nome);	
@@ -196,7 +252,8 @@ public class Fachada {
 		DAO.commit();	
 	}
 
-
+	// EXCLUIR (TO DO) 
+	
 	public static void excluirPessoa(String n) throws Exception {
 		DAO.begin();
 		Pessoa p = daopessoa.read(n);
@@ -228,6 +285,9 @@ public class Fachada {
 			DAO.commit();
 		}
 	}
+	
+	// LISTAR (TO DO)
+	
 	public static String listarPessoas(){
 		List<Pessoa> pessoas = daopessoa.readAll();
 		String texto="-----------listagem de Pessoas-----------\n";
@@ -256,7 +316,7 @@ public class Fachada {
 
 	/**********************************************************
 	 * 
-	 * CONSULTAS 
+	 * CONSULTAS  (TO DO)
 	 * 
 	 **********************************************************/
 	public static String consultarPessoasPorParteNome(String caracteres) {

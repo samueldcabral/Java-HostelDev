@@ -82,5 +82,9 @@ public class Hospedagem {
 		return "Hospedagem [dataCriacao=" + dataCriacao + ", id=" + id + ", hospede=" + hospede + ", produtos="
 				+ produtos + ", funcionario=" + funcionario + ", quarto=" + quarto + ", cama=" + cama + "]";
 	}
+
+	public void removerProduto(Produto p) {
+		this.produtos.remove(p);
+	}
 	
 }

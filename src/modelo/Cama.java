@@ -4,6 +4,7 @@ public class Cama {
 	private String id;
 	private String numero;
 	private String tipo;
+	private Quarto quarto; 
 	
 	public Cama(String id, String numero, String tipo) {
 		this.id = id;
@@ -21,6 +22,14 @@ public class Cama {
 
 	public String getNumero() {
 		return numero;
+	}
+
+	public Quarto getQuarto() {
+		return quarto;
+	}
+
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
 	}
 
 	public void setNumero(String numero) {

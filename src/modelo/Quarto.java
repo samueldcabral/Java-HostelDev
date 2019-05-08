@@ -37,10 +37,24 @@ public class Quarto {
 	public void adicionarCama(Cama cama) {
 		this.camas.add(cama);
 	}
+	
+	public Cama localizarCama(Cama cama) {
+		for(Cama c : this.camas) {
+			if(cama == c) {
+				return c;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public String toString() {
 		return "Quarto [ id=" + id + ", numero=" + numero + ", camas=" + camas + "]";
+	}
+
+
+	public void remover(Cama c) {
+		this.camas.remove(c);
 	}
 	
 	
