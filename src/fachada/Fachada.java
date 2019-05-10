@@ -1,13 +1,10 @@
-/**IFPB - Curso SI - Disciplina de PERSISTENCIA DE OBJETOS
- * @author Prof Fausto Ayres
- */
 
 package fachada;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAO;
-import dao.DAOAluno;
 import dao.DAOCama;
 import dao.DAOFuncionario;
 import dao.DAOHospedagem;
@@ -15,17 +12,13 @@ import dao.DAOHospede;
 import dao.DAOPessoa;
 import dao.DAOProduto;
 import dao.DAOQuarto;
-import dao.DAOTelefone;
-import modelo.Aluno;
 import modelo.Cama;
 import modelo.Funcionario;
 import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Pessoa;
 import modelo.Produto;
-import modelo.Professor;
 import modelo.Quarto;
-import modelo.Telefone;
 
 public class Fachada {
 	private static DAOPessoa daopessoa = new DAOPessoa();  
@@ -75,7 +68,7 @@ public class Fachada {
 		if(p != null)
 			throw new Exception("cadastrar Funcionario - pessoa ja cadastrado:" + nome);
 
-		p = new Funcionario(matricula, nome, telefone, salario);
+		p = new Funcionario(nome, telefone, matricula, salario);
 		daopessoa.create(p);	
 		DAO.commit();
 		return (Funcionario) p;
@@ -131,9 +124,13 @@ public class Fachada {
 		if(ho == null)
 			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + ho);
 		
+		System.out.println("Teste safado");
+		System.out.println("hospede : " + ho);
+		System.out.println("funcionario chegou: " + funcionario);
+		
 		Funcionario f = daofuncionario.read(funcionario);
 		if(f == null)
-			throw new Exception("cadastrar hospedagem - Funcionario nao cadastrado!: " + f);
+			throw new Exception("cadastrar hospedagem - Funcionario nao cadastrado!: " + funcionario);
 		
 		Quarto q = daoquarto.read(quarto);
 		if(q == null)
@@ -203,12 +200,13 @@ public class Fachada {
 			throw new Exception("adicionarProdutoHospedagem - Produto nao existe:" + nomeProduto);
 		
 		h.setProdutos(p);
+		p.setHospedagem(h);
 		daohospedagem.update(h);
 		DAO.commit();
 		return p;
 	}
 	
-	public static Produto removerProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
+	public static Produto excluirProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
 		DAO.begin();
 		Hospedagem h = daohospedagem.read(idHospedagem);
 		if(h == null)
@@ -236,57 +234,187 @@ public class Fachada {
 		p=daopessoa.update(p);     	
 		DAO.commit();	
 	}
-
-	public static void alterarTelefone(String numero, String novonumero) throws Exception{
-		DAO.begin();		
-		Telefone t = daotelefone.read(numero);	
-		if (t==null) 
-			throw new Exception("alterar telefone - numero inexistente:" + numero);
-
-		Telefone t2 = daotelefone.read(novonumero);	
-		if (t2!=null) 
-			throw new Exception("alterar telefone - numero ja existe:" + novonumero);
-
-		t.setNumero(novonumero); 			
-		t=daotelefone.update(t);     	
-		DAO.commit();	
+	
+	public static void alterarProduto(String nome, String novoNome, String novaDescricao, Double novoValor) throws Exception {
+		DAO.begin();
+		Produto prod = daoproduto.read(nome);
+		if(prod==null)
+			throw new Exception("alterarProduto - inexistente: " + nome);
+		
+		prod.setNome(novoNome);
+		prod.setDescricao(novaDescricao);
+		
+		if(prod.getValor() != novoValor) {
+			prod.setValor(novoValor);
+		}
+		
+		prod = daoproduto.update(prod);
+		DAO.commit();
 	}
-
+	
+	public static void alterarFuncionario(String nome, String novaMatricula, double novoSalario) throws Exception {
+		DAO.begin();
+		Funcionario funcionario = daofuncionario.read(nome);
+		if(funcionario==null)
+			throw new Exception("alterarFuncionario - inexistente: " + nome);
+		
+		if(novaMatricula != funcionario.getMatricula()) {
+			funcionario.setMatricula(novaMatricula);
+		}
+		if(novoSalario != funcionario.getSalario()) {
+			funcionario.setSalario(novoSalario);
+		}
+		
+		funcionario = daofuncionario.update(funcionario);
+		DAO.commit();
+	}
+	
 	// EXCLUIR (TO DO) 
 	
-	public static void excluirPessoa(String n) throws Exception {
+	public static void excluirHospede(String n) throws Exception {
 		DAO.begin();
-		Pessoa p = daopessoa.read(n);
-		if (p==null) 
-			throw new Exception("excluir pessoa - nome inexistente:" + n);
-
-		daopessoa.delete(p);
-		DAO.commit();
-	}
-
-
-	public void excluirPessoaManualmente(String nome) throws Exception{
-		DAO.begin();
-		Pessoa p = daopessoa.read(nome);	
-		if(p==null)
-			throw new Exception("excluir pessoa - nome inexistente:" + nome);
-
-		//apagar todos telefones da pessoa
-		removerTelefonesDaPessoa(p);
-		//apagar a pessoa
-		daopessoa.delete(p);      
+		Hospede hospede = daohospede.read(n);
+		if(hospede == null)
+			throw new Exception("excluir hospede - nome inexistente: " + n);
+		removerHospedagemDoHospede(hospede);
+		daohospede.delete(hospede);
 		DAO.commit();
 	}
 	
-	public void removerTelefonesDaPessoa(Pessoa p) {
-		for(Telefone t : p.getTelefones()) {
-			p.remover(t);
-			daotelefone.delete(t);		//deletar telefone orfao do banco
+	public static void removerHospedagemDoHospede(Hospede h) {
+		for(Hospedagem hospedagem : h.getHospedagens()) {
+			h.removerHospedagem(hospedagem);
+			daohospedagem.delete(hospedagem);
 			DAO.commit();
 		}
 	}
 	
+	public static void excluirFuncionario(String n) throws Exception {
+		DAO.begin();
+		Funcionario f = daofuncionario.read(n);
+		if (f==null) 
+			throw new Exception("excluirFuncionario - nome inexistente:" + n);
+
+		daofuncionario.delete(f);
+		DAO.commit();
+	}
+	
+	public static void excluirCama(String id) throws Exception {
+		DAO.begin();
+		Cama c = daocama.read(id);
+		if(c==null)
+			throw new Exception("excluirCama - inexistente" + id);
+		Quarto q = c.getQuarto();
+		q.remover(c);
+		daocama.delete(c);
+		DAO.commit();
+	}
+	
+	public static void excluirHospedagem(String id) throws Exception {
+		DAO.begin();
+		Hospedagem hospedagem = daohospedagem.read(id);
+		if(hospedagem==null)
+			throw new Exception("excluirHospedagem - inexistente: " + id);
+		Hospede hospede = hospedagem.getHospede();
+		hospede.removerHospedagem(hospedagem);
+		daohospedagem.delete(hospedagem);
+		DAO.commit();
+	}
+	
+	public static void excluirProduto(String id) throws Exception {
+		DAO.begin();
+		Produto p = daoproduto.read(id);
+		if(p==null)
+			throw new Exception(" excluirProduto : " + id);
+		removerProdutoDaHospedagem(p);
+		daoproduto.delete(p);
+		DAO.commit();
+	}
+	
+	public static void removerProdutoDaHospedagem(Produto p) {
+		for(Hospedagem h : p.getHospedagens()) {
+			h.removerProduto(p);
+		}
+	}
+	
+	public static void excluirQuarto(String id) throws Exception {
+		DAO.begin();
+		Quarto q = daoquarto.read(id);
+		if(q==null)
+			throw new Exception(" excluirQuarto : " + id);
+		ArrayList<Cama> c = q.getCamas();
+		excluirCamasDoQuarto(c, q);
+	}
+	
+	public static void excluirCamasDoQuarto(ArrayList<Cama> c, Quarto q) {
+		for(Cama cama : c) {
+			try {
+				excluirCamaQuarto(cama.getId(), q.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+//
+//
+//	public void excluirPessoaManualmente(String nome) throws Exception{
+//		DAO.begin();
+//		Pessoa p = daopessoa.read(nome);	
+//		if(p==null)
+//			throw new Exception("excluir pessoa - nome inexistente:" + nome);
+//
+//		//apagar todos telefones da pessoa
+//		removerTelefonesDaPessoa(p);
+//		//apagar a pessoa
+//		daopessoa.delete(p);      
+//		DAO.commit();
+//	}
+//	
+//	public void removerTelefonesDaPessoa(Pessoa p) {
+//		for(Telefone t : p.getTelefones()) {
+//			p.remover(t);
+//			daotelefone.delete(t);		//deletar telefone orfao do banco
+//			DAO.commit();
+//		}
+//	}
+	
 	// LISTAR (TO DO)
+	
+	public static String listarCamas(){
+		List<Cama> camas = daocama.readAll();
+		String texto="-----------listagem de Camas-----------\n";
+		for (Cama c : camas) {
+			texto += c +"\n";
+		}
+		return texto;
+	}
+	
+	public static String listarFuncionarios(){
+		List<Funcionario> funcs = daofuncionario.readAll();
+		String texto="-----------listagem de Funcionarios-----------\n";
+		for (Funcionario f : funcs) {
+			texto += f +"\n";
+		}
+		return texto;
+	}
+	
+	public static String listarHospedagens(){
+		List<Hospedagem> hosps = daohospedagem.readAll();
+		String texto="-----------listagem de Hospedagens-----------\n";
+		for (Hospedagem h : hosps) {
+			texto += h +"\n";
+		}
+		return texto;
+	}
+	
+	public static String listarHospedes(){
+		List<Hospede> hos = daohospede.readAll();
+		String texto="-----------listagem de Hospedes-----------\n";
+		for (Hospede h : hos) {
+			texto += h +"\n";
+		}
+		return texto;
+	}
 	
 	public static String listarPessoas(){
 		List<Pessoa> pessoas = daopessoa.readAll();
@@ -296,23 +424,25 @@ public class Fachada {
 		}
 		return texto;
 	}
-	public static String listarAlunos(){
-		List<Aluno> pessoas = daoaluno.readAll();
-		String texto="-----------listagem de Alunos-----------\n";
-		for (Aluno a : pessoas) {
-			texto += a +"\n";
+	
+	public static String listarProdutos(){
+		List<Produto> prods = daoproduto.readAll();
+		String texto="-----------listagem de Produtos-----------\n";
+		for (Produto pr : prods) {
+			texto +=  pr +"\n";
+		}
+		return texto;
+	}
+	
+	public static String listarQuartos(){
+		List<Quarto> qts = daoquarto.readAll();
+		String texto="-----------listagem de Quartos-----------\n";
+		for (Quarto q : qts) {
+			texto += q +"\n";
 		}
 		return texto;
 	}
 
-	public static String listarTelefones() { 	
-		List<Telefone> aux = daotelefone.readAll();
-		String texto="-----------listagem de Telefones---------\n";
-		for(Telefone t: aux) {
-			texto += "\n" + t; 
-		}
-		return texto;
-	}
 
 	/**********************************************************
 	 * 
@@ -331,16 +461,16 @@ public class Fachada {
 	}
 
 
-	public static String consultarPessoasNTelefones(int n) {
-		List<Pessoa> result = daopessoa.consultarPessoasNTelefones(n);
-
-		String texto = "\nConsultar pessoas com "+n+" telefones:";
-		if (result.isEmpty())  
-			texto += "consulta vazia";
-		else 
-			for(Pessoa p: result)texto += "\n" + p;
-		return texto;
-	}
+//	public static String consultarPessoasNTelefones(int n) {
+//		List<Pessoa> result = daopessoa.consultarPessoasNTelefones(n);
+//
+//		String texto = "\nConsultar pessoas com "+n+" telefones:";
+//		if (result.isEmpty())  
+//			texto += "consulta vazia";
+//		else 
+//			for(Pessoa p: result)texto += "\n" + p;
+//		return texto;
+//	}
 
 	public static String consultarPessoaPorNumero(String n) {
 		Pessoa result = daopessoa.consultarPessoaPorNumero(n);
@@ -351,25 +481,25 @@ public class Fachada {
 
 	}
 
-	public static String consultarTelefonesPorNome(String n) {
-		List<Telefone> result = daotelefone.consultarTelefonesPorNome(n);
-		String texto = "\nConsultar telefones de " + n;
-		if (result.isEmpty())  
-			texto += "consulta vazia";
-		else 
-			for(Telefone t: result)texto += "\n" + t;
-		return texto;
-	}
-
-	public static String consultarTelefonesPorPrefixo(String prefixo) {
-		List<Telefone> result = daotelefone.consultarTelefonesPorPrefixo(prefixo);
-		String texto = "\nConsultar telefones do prefixo " + prefixo;
-		if (result.isEmpty())  
-			texto += "consulta vazia";
-		else 
-			for(Telefone t: result)texto += "\n" + t;
-		return texto;
-	}
+//	public static String consultarTelefonesPorNome(String n) {
+//		List<Telefone> result = daotelefone.consultarTelefonesPorNome(n);
+//		String texto = "\nConsultar telefones de " + n;
+//		if (result.isEmpty())  
+//			texto += "consulta vazia";
+//		else 
+//			for(Telefone t: result)texto += "\n" + t;
+//		return texto;
+//	}
+//
+//	public static String consultarTelefonesPorPrefixo(String prefixo) {
+//		List<Telefone> result = daotelefone.consultarTelefonesPorPrefixo(prefixo);
+//		String texto = "\nConsultar telefones do prefixo " + prefixo;
+//		if (result.isEmpty())  
+//			texto += "consulta vazia";
+//		else 
+//			for(Telefone t: result)texto += "\n" + t;
+//		return texto;
+//	}
 
 
 

@@ -52,6 +52,11 @@ public class Hospedagem {
 	public void setProdutos(Produto produto) {
 		this.produtos.add(produto);
 	}
+	
+	public void removerProduto(Produto p) {
+		this.produtos.remove(p);
+	}
+	
 
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -83,8 +88,5 @@ public class Hospedagem {
 				+ produtos + ", funcionario=" + funcionario + ", quarto=" + quarto + ", cama=" + cama + "]";
 	}
 
-	public void removerProduto(Produto p) {
-		this.produtos.remove(p);
-	}
 	
 }

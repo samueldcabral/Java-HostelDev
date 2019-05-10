@@ -34,6 +34,10 @@ public class Quarto {
 		return this.camas;
 	}
 	
+	public void removerCama(Cama cama) {
+		this.camas.add(cama);
+	}
+	
 	public void adicionarCama(Cama cama) {
 		this.camas.add(cama);
 	}

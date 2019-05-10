@@ -6,7 +6,7 @@ public class Hospede extends Pessoa{
 	private String id;
 	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
 	
-	public Hospede(String nome, String telefone, String id) {
+	public Hospede(String id, String nome, String telefone) {
 		super(nome, telefone);
 		// TODO Auto-generated constructor stub
 		this.id = id;
@@ -24,6 +24,14 @@ public class Hospede extends Pessoa{
 		this.hospedagens.add(h);
 	}
 	
+	public ArrayList<Hospedagem> getHospedagens() {
+		return hospedagens;
+	}
+
+	public void setHospedagens(ArrayList<Hospedagem> hospedagens) {
+		this.hospedagens = hospedagens;
+	}
+
 	public void removerHospedagem(Hospedagem h) {
 		this.hospedagens.remove(h);
 	}
