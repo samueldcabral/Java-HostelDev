@@ -15,19 +15,18 @@ public class Atualizar {
 		Fachada.inicializar();
 		try {
 			System.out.println("alterando...");
-			Fachada.alterarPessoa("joao", "joana");
-			Fachada.excluirTelefonePessoa("joana", "88881111");
-			Fachada.alterarTelefone("88880000", "88889999");
+			Fachada.alterarPessoa("Allana Sueli da Paz", "Skywalker Sueli da Paz");
+
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
 		//erros
-		try {Fachada.excluirTelefonePessoa("joana", "88883333"); }//produz erro 
-		catch (Exception e) {System.out.println(e.getMessage());}
-		try {Fachada.alterarTelefone("88889999", "88883333"); }//produz erro 
-		catch (Exception e) {System.out.println(e.getMessage());}
+//		try {Fachada.excluirTelefonePessoa("joana", "88883333"); }//produz erro 
+//		catch (Exception e) {System.out.println(e.getMessage());}
+//		try {Fachada.alterarTelefone("88889999", "88883333"); }//produz erro 
+//		catch (Exception e) {System.out.println(e.getMessage());}
 
 		Fachada.finalizar();
 		System.out.println("fim do programa");

@@ -14,9 +14,20 @@ public class Listar {
 	public Listar(){
 		Fachada.inicializar();
 		try {
-			System.out.println(Fachada.listarPessoas());
-			System.out.println(Fachada.listarAlunos());
-			System.out.println(Fachada.listarTelefones());
+//			System.out.println(Fachada.listarPessoas());
+			System.out.println(Fachada.listarCamas());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			System.out.println(Fachada.listarFuncionarios());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			System.out.println(Fachada.listarHospedagens());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			System.out.println(Fachada.listarHospedes());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			System.out.println(Fachada.listarQuartos());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			System.out.println(Fachada.listarProdutos());
+			System.out.println("\n----------------------------------------------------------------------\n");
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

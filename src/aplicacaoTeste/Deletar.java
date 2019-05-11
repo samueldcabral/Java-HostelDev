@@ -15,7 +15,7 @@ public class Deletar {
 		Fachada.inicializar();
 		try {
 			System.out.println("deletando...");
-			Fachada.excluirPessoa("maria");
+			Fachada.excluirHospede("Barbara Lucia");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

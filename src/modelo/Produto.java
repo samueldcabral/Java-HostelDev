@@ -7,9 +7,7 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private double valor;
-	private ArrayList<Hospedagem> hospedagens;
-	
-
+	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
 
 	public Produto(String id, String nome, String descricao, double valor) {
 		super();
@@ -55,15 +53,28 @@ public class Produto {
 		return hospedagens;
 	}
 
-	public void setHospedagem(Hospedagem hospedagens) {
-		this.hospedagens.add(hospedagens);
+	public void setHospedagens(Hospedagem h) {
+		this.hospedagens.add(h);
 	}
 	
-	public void removerHospedagem(Hospedagem hospedagem) {
-		this.hospedagens.remove(hospedagem);
+	public void removerHospedagens(Hospedagem h) {
+		this.hospedagens.remove(h);
 	}
+	
+//	public ArrayList<Hospedagem> getHospedagens() {
+//		return hospedagens;
+//	}
+
+//	public void setHospedagem(Hospedagem hosps) {
+//		System.out.println("cabral");
+//		this.hospedagens.remove(hosps);
+//		System.out.println("samuel");
+//	}
+	
+
 	@Override
 	public String toString() {
-		return "Produto [ id = " + id + ", nome = " + nome + ", descricao = " + descricao + ", valor = " + valor + " ]";
+		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor
+				+ ", hospedagens=" + hospedagens + "]";
 	}	
 }

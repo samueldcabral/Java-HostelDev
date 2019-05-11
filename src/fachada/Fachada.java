@@ -124,10 +124,6 @@ public class Fachada {
 		if(ho == null)
 			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + ho);
 		
-		System.out.println("Teste safado");
-		System.out.println("hospede : " + ho);
-		System.out.println("funcionario chegou: " + funcionario);
-		
 		Funcionario f = daofuncionario.read(funcionario);
 		if(f == null)
 			throw new Exception("cadastrar hospedagem - Funcionario nao cadastrado!: " + funcionario);
@@ -161,6 +157,10 @@ public class Fachada {
 		if(q == null)
 			throw new Exception("adicionar quarto - quarto nao cadastrado: " + idQuarto);
 		
+		Quarto quartoAtual = c.getQuarto();
+		if(quartoAtual != null)
+			throw new Exception("adicionarCamaQuarto - Cama ja tem quarto!");
+		
 		q.adicionarCama(c);
 		c.setQuarto(q);
 		daoquarto.update(q);
@@ -184,6 +184,7 @@ public class Fachada {
 			throw new Exception("excluir cama quarto - quarto nao tem cama: " + q.getId());
 		
 		q.remover(c);
+		c.setQuarto(null);
 		daoquarto.update(q);
 		DAO.commit();
 		return c;
@@ -200,7 +201,7 @@ public class Fachada {
 			throw new Exception("adicionarProdutoHospedagem - Produto nao existe:" + nomeProduto);
 		
 		h.setProdutos(p);
-		p.setHospedagem(h);
+		p.setHospedagens(h);
 		daohospedagem.update(h);
 		DAO.commit();
 		return p;

@@ -58,7 +58,7 @@ public class TelaPrincipal {
 	 */
 	private void initialize() {
 		frmPrincipal = new JFrame();
-		
+
 
 		frmPrincipal.addWindowListener(new WindowAdapter() {
 			@Override
@@ -76,22 +76,22 @@ public class TelaPrincipal {
 		frmPrincipal.setBounds(100, 100, 450, 300);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmPrincipal.setJMenuBar(menuBar);
-		
+
 		mnPessoa = new JMenu("Pessoa");
 		menuBar.add(mnPessoa);
-		
+
 		mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaCadastro j = new TelaCadastro();
 			}
-			
+
 		});
 		mnPessoa.add(mntmCadastrar);
-		
+
 		mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -100,9 +100,9 @@ public class TelaPrincipal {
 			}
 		});
 		mnPessoa.add(mntmListar);
-		
-		
-		
+
+
+
 		mnTelefone = new JMenu("Telefone");
 		menuBar.add(mnTelefone);
 		JMenuItem mntmCriar = new JMenuItem("Adicionar");
@@ -111,7 +111,7 @@ public class TelaPrincipal {
 			}
 		});
 		mnTelefone.add(mntmCriar);
-		
+
 		JMenuItem mntmListar_1 = new JMenuItem("Listar");
 		mntmListar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,11 +120,15 @@ public class TelaPrincipal {
 			}
 		});
 		mnTelefone.add(mntmListar_1);
-		
+
 		mnConsulta = new JMenu("Consultas");
 		mnConsulta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				TelaConsulta j = new TelaConsulta();
+				j.setVisible(true);
+
+			
 			}
 		});
 		menuBar.add(mnConsulta);
