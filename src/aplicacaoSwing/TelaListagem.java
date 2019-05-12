@@ -35,22 +35,32 @@ public class TelaListagem extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaListagem() {
+	private String cls;
+	public TelaListagem(String classe) {
+		this.cls = classe;
 		setTitle("Listar");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 550, 211);
+		setBounds(1200, 300, 550, 211);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		btnCriar = new JButton("Listar Pessoas");
+				
+		btnCriar = new JButton("Listar " + classe);
 		btnCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-
-					textArea.setText(Fachada.listarPessoas());
+					if(cls.equals("Hospede")) {
+						textArea.setText(Fachada.listarHospedes());
+					}else if(cls.equals("Funcionario")){
+						textArea.setText(Fachada.listarFuncionarios());
+					}else if(cls.equals("Hospedagem")) {
+						textArea.setText(Fachada.listarHospedagens());
+					}else {
+						textArea.setText("waht");
+					}
+					
 				}
 				catch(Exception erro){
 					JOptionPane.showMessageDialog(null,erro.getMessage());
@@ -66,20 +76,20 @@ public class TelaListagem extends JFrame {
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scroll);
-
-		btnListarTelefones = new JButton("Listar Telefones");
-		btnListarTelefones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try{
-
-					textArea.setText(Fachada.listarTelefones());
-				}
-				catch(Exception erro){
-					JOptionPane.showMessageDialog(null,erro.getMessage());
-				}
-			}
-		});
-		btnListarTelefones.setBounds(306, 149, 115, 23);
-		contentPane.add(btnListarTelefones);
+//
+//		btnListarTelefones = new JButton("Listar Telefones");
+//		btnListarTelefones.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				try{
+//
+//					textArea.setText(Fachada.listarTelefones());
+//				}
+//				catch(Exception erro){
+//					JOptionPane.showMessageDialog(null,erro.getMessage());
+//				}
+//			}
+//		});
+//		btnListarTelefones.setBounds(306, 149, 115, 23);
+//		contentPane.add(btnListarTelefones);
 	}
 }

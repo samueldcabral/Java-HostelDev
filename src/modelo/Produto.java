@@ -8,7 +8,8 @@ public class Produto {
 	private String descricao;
 	private double valor;
 	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
-
+	private ArrayList<String> idHospedagens = new ArrayList<String>();
+	
 	public Produto(String id, String nome, String descricao, double valor) {
 		super();
 		this.id = id;
@@ -72,9 +73,21 @@ public class Produto {
 //	}
 	
 
+	public ArrayList<String> getIdHospedagens() {
+		return idHospedagens;
+	}
+
+	public void setIdHospedagens(String idHospedagens) {
+		this.idHospedagens.add(idHospedagens);
+	}
+
+	public void setHospedagens(ArrayList<Hospedagem> hospedagens) {
+		this.hospedagens = hospedagens;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valor=" + valor
-				+ ", hospedagens=" + hospedagens + "]";
+				+ ", idHospedagens=" + idHospedagens + "]";
 	}	
 }

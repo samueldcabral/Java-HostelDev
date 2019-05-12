@@ -5,6 +5,7 @@ public class Cama {
 	private String numero;
 	private String tipo;
 	private Quarto quarto; 
+	private String nomeQuarto;
 	
 	public Cama(String id, String numero, String tipo) {
 		this.id = id;
@@ -43,11 +44,18 @@ public class Cama {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	public String getNomeQuarto() {
+		return nomeQuarto;
+	}
 
-	@Override
-	public String toString() {
-		return "Cama [ id =  " + id + ", numero = " + numero + ", tipo = " + tipo + " ]";
+	public void setNomeQuarto(String nomeQuarto) {
+		this.nomeQuarto = nomeQuarto;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Cama [id=" + id + ", numero=" + numero + ", tipo=" + tipo + ", Quarto=" + nomeQuarto + "]";
+	}
+
 }

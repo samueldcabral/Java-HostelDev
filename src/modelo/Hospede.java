@@ -5,7 +5,10 @@ import java.util.ArrayList;
 public class Hospede extends Pessoa{
 	private String id;
 	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
+	private ArrayList<String> idHospedagens = new ArrayList<String>();
 	
+
+
 	public Hospede(String id, String nome, String telefone) {
 		super(nome, telefone);
 		// TODO Auto-generated constructor stub
@@ -36,8 +39,17 @@ public class Hospede extends Pessoa{
 		this.hospedagens.remove(h);
 	}
 	
+	public ArrayList<String> getIdHospedagens() {
+		return idHospedagens;
+	}
+
+	public void setIdHospedagens(String idHospedagens) {
+		this.idHospedagens.add(idHospedagens);
+	}
+	
 	@Override
 	public String toString() {
-		return "Hospede [ id = " + id + ", nome = " + nome + ", telefone = " + telefone + " ]";
+		return "Hospede [id=" + id + ", idHospedagens=" + idHospedagens + ", nome=" + nome + ", telefone=" + telefone
+				+ "]";
 	}
 }

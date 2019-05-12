@@ -1,9 +1,4 @@
 package aplicacaoSwing;
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Programação Orientada a Objetos
- * Prof. Fausto Maranhão Ayres
- **********************************/
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -12,8 +7,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -27,8 +28,8 @@ public class TelaPrincipal {
 	private JMenuItem mntmCadastrar;
 	private JMenuItem mntmListar;
 	private JMenu mnConsulta;
-	private JMenu mnTelefone;
-	private JMenu mnPessoa;
+	private JMenu mnFuncionario;
+	private JMenu mnHospede;
 
 	/**
 	 * Launch the application.
@@ -73,15 +74,32 @@ public class TelaPrincipal {
 			}
 		});
 		frmPrincipal.setTitle("Agenda");
-		frmPrincipal.setBounds(100, 100, 450, 300);
+		frmPrincipal.setBounds(1200, 300, 624, 306);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
 
+		
+//		BufferedImage myPicture = null;
+//		try {
+//			myPicture = ImageIO.read(new File("img/HostelDev.png"));
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		frmPrincipal.setLayout(null);
+//		
+//		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+//		picLabel.setBounds(-154, -61, 1391, 1011);
+//		frmPrincipal.add(picLabel);
+		
+		
 		JMenuBar menuBar = new JMenuBar();
 		frmPrincipal.setJMenuBar(menuBar);
+		
+		// HOSPEDE MENU BAR
 
-		mnPessoa = new JMenu("Pessoa");
-		menuBar.add(mnPessoa);
+		mnHospede = new JMenu("Hospede");
+		menuBar.add(mnHospede);
 
 		mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addActionListener(new ActionListener() {
@@ -90,47 +108,69 @@ public class TelaPrincipal {
 			}
 
 		});
-		mnPessoa.add(mntmCadastrar);
+		mnHospede.add(mntmCadastrar);
 
 		mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaListagem j = new TelaListagem();
+				TelaListagem j = new TelaListagem("Hospede");
 				j.setVisible(true);
 			}
 		});
-		mnPessoa.add(mntmListar);
+		mnHospede.add(mntmListar);
 
 
-
-		mnTelefone = new JMenu("Telefone");
-		menuBar.add(mnTelefone);
-		JMenuItem mntmCriar = new JMenuItem("Adicionar");
-		mntmCriar.addActionListener(new ActionListener() {
+		// FUNCIONARIO MENU BAR
+		mnFuncionario = new JMenu("Funcionario");
+		menuBar.add(mnFuncionario);
+		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
+		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		mnTelefone.add(mntmCriar);
+		mnFuncionario.add(mntmCadastrar);
 
 		JMenuItem mntmListar_1 = new JMenuItem("Listar");
 		mntmListar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaListagem j = new TelaListagem();
+				TelaListagem j = new TelaListagem("Funcionario");
 				j.setVisible(true);
 			}
 		});
-		mnTelefone.add(mntmListar_1);
+		mnFuncionario.add(mntmListar_1);
+		
+		//HOSPEDAGENS MENU BAR
+		JMenu mnHospededagem = new JMenu("Hospedagem");
+		menuBar.add(mnHospededagem);
 
-		mnConsulta = new JMenu("Consultas");
-		mnConsulta.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				TelaConsulta j = new TelaConsulta();
+		JMenuItem mntmCadastrar_2 = new JMenuItem("Cadastrar");
+		mntmCadastrar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro j = new TelaCadastro();
+			}
+
+		});
+		mnHospededagem.add(mntmCadastrar_2);
+
+		JMenuItem mntmListar_2 = new JMenuItem("Listar");
+		mntmListar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaListagem j = new TelaListagem("Hospedagem");
 				j.setVisible(true);
-
-			
 			}
 		});
-		menuBar.add(mnConsulta);
+		mnHospededagem.add(mntmListar_2);
+		
+				mnConsulta = new JMenu("Consultas");
+				mnConsulta.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						TelaConsulta j = new TelaConsulta();
+						j.setVisible(true);
+
+					
+					}
+				});
+				menuBar.add(mnConsulta);
 	}
 }

@@ -2,24 +2,24 @@ package aplicacaoTeste;
 
 
 import fachada.Fachada;
-//import modelo.Cama;
-//import modelo.Funcionario;
-//import modelo.Hospedagem;
-//import modelo.Hospede;
-//import modelo.Produto;
-//import modelo.Quarto;
+import modelo.Cama;
+import modelo.Funcionario;
+import modelo.Hospedagem;
+import modelo.Hospede;
+import modelo.Produto;
+import modelo.Quarto;
 
 
 public class Cadastrar {
 
 	public Cadastrar(){
 		Fachada.inicializar();
-//		Hospede h;
-//		Funcionario f;
-//		Produto prod;
-//		Cama c;
-//		Quarto q;
-//		Hospedagem hos;
+		Hospede h;
+		Funcionario f;
+		Produto prod;
+		Cama c;
+		Quarto q;
+		Hospedagem hos;
 		
 		try {
 			System.out.println("cadastrando...");
@@ -71,29 +71,29 @@ public class Cadastrar {
 //			q=Fachada.cadastrarQuarto("2", "102");
 //			q=Fachada.cadastrarQuarto("3", "201");
 //			q=Fachada.cadastrarQuarto("4", "202");
-			
-//			System.out.println("\nHospedagem \n");
-//			System.out.println("1");
-//			hos=Fachada.cadastrarHospedagem("1", "Vicente Benício Santos", "Joao Giovanni Tomas da Mota", "1", "1");
-//			System.out.println("2");
-//			hos=Fachada.cadastrarHospedagem("2", "Vicente Benício Santos", "Joao Giovanni Tomas da Mota", "2", "6");
-//			System.out.println("3");
-//			hos=Fachada.cadastrarHospedagem("3", "Alice Sara", "Julia Marli Marcia", "1", "2");
+//			
+			System.out.println("\nHospedagem \n");
+			System.out.println("1");
+			hos=Fachada.cadastrarHospedagem("1", "Vicente Benício Santos", "Joao Giovanni Tomas da Mota", "1", "1");
+			System.out.println("2");
+			hos=Fachada.cadastrarHospedagem("2", "Vicente Benício Santos", "Joao Giovanni Tomas da Mota", "2", "6");
+			System.out.println("3");
+			hos=Fachada.cadastrarHospedagem("3", "Alice Sara", "Julia Marli Marcia", "1", "2");
 
-//			System.out.println("adicionarCamaQuarto");
-//			c=Fachada.adicionarCamaQuarto("1", "1");
-//			c=Fachada.adicionarCamaQuarto("2", "1");
-//			c=Fachada.adicionarCamaQuarto("3", "1");
-//			c=Fachada.adicionarCamaQuarto("4", "2");
-//			c=Fachada.adicionarCamaQuarto("5", "1");
+			System.out.println("adicionarCamaQuarto");
+			c=Fachada.adicionarCamaQuarto("1", "1");
+			c=Fachada.adicionarCamaQuarto("2", "1");
+			c=Fachada.adicionarCamaQuarto("3", "1");
+			c=Fachada.adicionarCamaQuarto("4", "2");
+			c=Fachada.adicionarCamaQuarto("5", "1");
 			
 			System.out.println("adicionarProdutoHospedagem");
-//			prod=Fachada.adicionarProdutoHospedagem("Coca-Cola", "1");
-//			prod=Fachada.adicionarProdutoHospedagem("Pizza Mussarela", "1");
-//			prod=Fachada.adicionarProdutoHospedagem("Sprite", "2");
-//			prod=Fachada.adicionarProdutoHospedagem("Empada", "2");
-//			prod=Fachada.adicionarProdutoHospedagem("Pizza Calabresa", "2");
-
+			prod=Fachada.adicionarProdutoHospedagem("Coca-Cola", "1");
+			prod=Fachada.adicionarProdutoHospedagem("Pizza Mussarela", "1");
+			prod=Fachada.adicionarProdutoHospedagem("Sprite", "2");
+			prod=Fachada.adicionarProdutoHospedagem("Empada", "2");
+			prod=Fachada.adicionarProdutoHospedagem("Pizza Calabresa", "2");
+			prod=Fachada.adicionarProdutoHospedagem("Pizza Calabresa", "1");
 			
 			
 //			p=Fachada.cadastrarPessoa("maria");

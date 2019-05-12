@@ -139,6 +139,7 @@ public class Fachada {
 		//(ate aqui)
 		h = new Hospedagem(id, ho, f, q, c);
 		ho.adicionarHospedagem(h);
+		ho.setIdHospedagens(h.getId());
 
 		daohospedagem.create(h);	
 		DAO.commit();
@@ -163,7 +164,9 @@ public class Fachada {
 		
 		q.adicionarCama(c);
 		c.setQuarto(q);
+		c.setNomeQuarto(q.getId());
 		daoquarto.update(q);
+		daocama.update(c);
 		DAO.commit();
 		return c;
 	}
@@ -202,7 +205,9 @@ public class Fachada {
 		
 		h.setProdutos(p);
 		p.setHospedagens(h);
+		p.setIdHospedagens(h.getId());
 		daohospedagem.update(h);
+		daoproduto.update(p);
 		DAO.commit();
 		return p;
 	}
@@ -481,6 +486,61 @@ public class Fachada {
 			return "\nConsultar pessoa do numero "+n+" => " +result.getNome();
 
 	}
+	
+	// CONSULTAS USANDO 3 CLASSES
+	
+	public static ArrayList<Produto> consultarProdutosDeTodasHospedagensDoHospede(String nomeHospede) throws Exception{
+		Hospede hospede = daohospede.read(nomeHospede);
+		if(hospede == null)
+			throw new Exception("consultarProdutosDeTodasHospedagensDoHospede - hospede nao existe: " + nomeHospede);
+		
+		ArrayList<Hospedagem> hospedagens = hospede.getHospedagens();
+		ArrayList<Produto> prods = new ArrayList<Produto>();
+		
+		for(Hospedagem hos : hospedagens) {
+			for(Produto prod : hos.getProdutos()) {
+				prods.add(prod);
+			}
+		}
+		
+		return prods;
+	}
+	
+	public static ArrayList<String> consultarValorGastoPorProdutosNaHospedagemHospede(String nomeHospede) throws Exception {
+		Hospede hospede = daohospede.read(nomeHospede);
+		if(hospede == null)
+			throw new Exception("consultarValorGastoPorProdutosNaHospedagemHospede - hospede nao existe: " + nomeHospede);
+		
+		ArrayList<Hospedagem> hospedagens = hospede.getHospedagens();
+		ArrayList<String> valoresProdutos = new ArrayList<String>();
+		
+		for(Hospedagem hos : hospedagens) {
+			double total = 0;
+			for(Produto prod : hos.getProdutos()) {
+				total += prod.getValor();
+			}
+			valoresProdutos.add("hospedagem " + hos.getId());
+			valoresProdutos.add(total + "");
+		}
+		return valoresProdutos;
+	}
+	
+	public static ArrayList<String> consultarFuncionarioCadastrouHospede(String nomeHospede) throws Exception {
+		Hospede hospede = daohospede.read(nomeHospede);
+		if(hospede == null)
+			throw new Exception("consultarFuncionarioCadastrouHospede - hospede nao existe: " + nomeHospede);
+		
+		ArrayList<Hospedagem> hospedagens = hospede.getHospedagens();
+		ArrayList<String> nomesFuncionarios = new ArrayList<String>();
+		
+		for(Hospedagem hos : hospedagens) {
+			nomesFuncionarios.add("hospedagem " + hos.getId());
+			nomesFuncionarios.add(hos.getFuncionario().getNome());
+		}
+		return nomesFuncionarios;
+	}
+	
+	
 
 //	public static String consultarTelefonesPorNome(String n) {
 //		List<Telefone> result = daotelefone.consultarTelefonesPorNome(n);
