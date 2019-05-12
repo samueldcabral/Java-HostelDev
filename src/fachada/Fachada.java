@@ -264,7 +264,7 @@ public class Fachada {
 		if(funcionario==null)
 			throw new Exception("alterarFuncionario - inexistente: " + nome);
 		
-		if(novaMatricula != funcionario.getMatricula()) {
+		if(novaMatricula != funcionario.getMatricula() && !novaMatricula.equals("")) {
 			funcionario.setMatricula(novaMatricula);
 		}
 		if(novoSalario != funcionario.getSalario()) {
@@ -310,8 +310,11 @@ public class Fachada {
 		Cama c = daocama.read(id);
 		if(c==null)
 			throw new Exception("excluirCama - inexistente" + id);
+		
 		Quarto q = c.getQuarto();
-		q.remover(c);
+		
+		if(q != null)
+			q.remover(c);
 		daocama.delete(c);
 		DAO.commit();
 	}
@@ -327,11 +330,12 @@ public class Fachada {
 		DAO.commit();
 	}
 	
-	public static void excluirProduto(String id) throws Exception {
+	public static void excluirProduto(String nomeProduto) throws Exception {
 		DAO.begin();
-		Produto p = daoproduto.read(id);
+		Produto p = daoproduto.read(nomeProduto);
 		if(p==null)
-			throw new Exception(" excluirProduto : " + id);
+			throw new Exception(" excluirProduto : " + nomeProduto);
+		
 		removerProdutoDaHospedagem(p);
 		daoproduto.delete(p);
 		DAO.commit();
@@ -346,10 +350,17 @@ public class Fachada {
 	public static void excluirQuarto(String id) throws Exception {
 		DAO.begin();
 		Quarto q = daoquarto.read(id);
+		
 		if(q==null)
 			throw new Exception(" excluirQuarto : " + id);
+		
 		ArrayList<Cama> c = q.getCamas();
-		excluirCamasDoQuarto(c, q);
+		
+		if(c.size() > 0) {
+			excluirCamasDoQuarto(c, q);
+		}
+		daoquarto.delete(q);
+		DAO.commit();
 	}
 	
 	public static void excluirCamasDoQuarto(ArrayList<Cama> c, Quarto q) {
@@ -390,7 +401,7 @@ public class Fachada {
 		List<Cama> camas = daocama.readAll();
 		String texto="-----------listagem de Camas-----------\n";
 		for (Cama c : camas) {
-			texto += c +"\n";
+			texto += c +"\n\n";
 		}
 		return texto;
 	}
@@ -399,7 +410,7 @@ public class Fachada {
 		List<Funcionario> funcs = daofuncionario.readAll();
 		String texto="-----------listagem de Funcionarios-----------\n";
 		for (Funcionario f : funcs) {
-			texto += f +"\n";
+			texto += f +"\n\n";
 		}
 		return texto;
 	}
@@ -408,7 +419,7 @@ public class Fachada {
 		List<Hospedagem> hosps = daohospedagem.readAll();
 		String texto="-----------listagem de Hospedagens-----------\n";
 		for (Hospedagem h : hosps) {
-			texto += h +"\n";
+			texto += h +"\n\n";
 		}
 		return texto;
 	}
@@ -417,7 +428,7 @@ public class Fachada {
 		List<Hospede> hos = daohospede.readAll();
 		String texto="-----------listagem de Hospedes-----------\n";
 		for (Hospede h : hos) {
-			texto += h +"\n";
+			texto += h +"\n\n";
 		}
 		return texto;
 	}
@@ -426,7 +437,7 @@ public class Fachada {
 		List<Pessoa> pessoas = daopessoa.readAll();
 		String texto="-----------listagem de Pessoas-----------\n";
 		for (Pessoa pe : pessoas) {
-			texto += pe +"\n";
+			texto += pe +"\n\n";
 		}
 		return texto;
 	}
@@ -435,7 +446,7 @@ public class Fachada {
 		List<Produto> prods = daoproduto.readAll();
 		String texto="-----------listagem de Produtos-----------\n";
 		for (Produto pr : prods) {
-			texto +=  pr +"\n";
+			texto +=  pr +"\n\n";
 		}
 		return texto;
 	}
@@ -444,7 +455,7 @@ public class Fachada {
 		List<Quarto> qts = daoquarto.readAll();
 		String texto="-----------listagem de Quartos-----------\n";
 		for (Quarto q : qts) {
-			texto += q +"\n";
+			texto += q +"\n\n";
 		}
 		return texto;
 	}

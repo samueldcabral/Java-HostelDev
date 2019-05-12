@@ -30,6 +30,7 @@ public class TelaPrincipal {
 	private JFrame frmPrincipal;
 	private JMenuItem mntmCadastrar;
 	private JMenuItem mntmListar;
+	private JMenuItem mntmAlterarDeletar;
 	private JMenu mnConsulta;
 	private JMenu mnFuncionario;
 	private JMenu mnHospede;
@@ -137,6 +138,13 @@ public class TelaPrincipal {
 		});
 		mnHospede.add(mntmListar);
 
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deletar");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Hospede");
+			}
+		});
+		mnHospede.add(mntmAlterarDeletar);
 
 		// FUNCIONARIO MENU BAR
 		mnFuncionario = new JMenu("Funcionario");
@@ -157,6 +165,14 @@ public class TelaPrincipal {
 			}
 		});
 		mnFuncionario.add(mntmListar_1);
+		
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Funcionario");
+			}
+		});
+		mnFuncionario.add(mntmAlterarDeletar);
 		
 		//HOSPEDAGENS MENU BAR
 		JMenu mnHospededagem = new JMenu("Hospedagem");
@@ -180,6 +196,14 @@ public class TelaPrincipal {
 		});
 		mnHospededagem.add(mntmListar_2);
 		
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Hospedagem");
+			}
+		});
+		mnHospededagem.add(mntmAlterarDeletar);
+		
 		//PRODUTO MENU BAR
 		JMenu mnProduto = new JMenu("Produto");
 		menuBar.add(mnProduto);
@@ -201,6 +225,14 @@ public class TelaPrincipal {
 			}
 		});
 		mnProduto.add(mntmListar_3);
+		
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Produto");
+			}
+		});
+		mnProduto.add(mntmAlterarDeletar);
 		
 		//QUARTO MENU BAR
 		JMenu mnQuarto = new JMenu("Quarto");
@@ -224,6 +256,14 @@ public class TelaPrincipal {
 		});
 		mnQuarto.add(mntmListar_4);
 		
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Quarto");
+			}
+		});
+		mnQuarto.add(mntmAlterarDeletar);
+		
 		//CAMA MENU BAR
 		JMenu mnCama = new JMenu("Cama");
 		menuBar.add(mnCama);
@@ -245,7 +285,15 @@ public class TelaPrincipal {
 			}
 		});
 		mnCama.add(mntmListar_5);
-				
+		
+		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+		mntmAlterarDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAlteracao j = new TelaAlteracao("Cama");
+			}
+		});
+		mnCama.add(mntmAlterarDeletar);
+		
 		//CONSULTAS MENU BAR
 		mnConsulta = new JMenu("Consultas");
 		mnConsulta.addMouseListener(new MouseAdapter() {
