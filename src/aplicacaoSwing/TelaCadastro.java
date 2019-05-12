@@ -205,7 +205,24 @@ public class TelaCadastro {
 						textField_4.setText("");
 						
 					} else if(cls.equals("Hospedagem")) {
+						String idHospedagem = textField_1.getText();
+						String nomeHospede = textField_2.getText();
+						String nomeFuncionario = textField_3.getText();
+						String idQuarto = textField_4.getText();
+						String idCama = textField_5.getText();
 						
+						if(!idHospedagem.isEmpty() && !nomeHospede.isEmpty() && !idQuarto.isEmpty() && !idCama.isEmpty()) {
+							Fachada.cadastrarHospedagem(idHospedagem, nomeHospede, nomeFuncionario, idQuarto, idCama);
+							label6.setText("Resultado: cadastro concluido");
+						}else {
+							label6.setText("Resultado: Erro! Cadastro nao realizado");
+						}
+		
+						textField_1.setText("");
+						textField_2.setText("");
+						textField_3.setText("");
+						textField_4.setText("");
+						textField_5.setText("");
 						
 					} else if(cls.equals("Produto")) {
 						String idProduto = textField_1.getText();
