@@ -1,6 +1,4 @@
-/**IFPB - Curso SI - Disciplina de POB
- * @author Prof Fausto Ayres
- */
+
 package dao;
 
 import java.util.List;
@@ -60,16 +58,6 @@ public class DAOQuarto  extends DAO<Quarto>{
 			return null;
 		
 	}
-//	public List<Pessoa>  consultarPessoasNTelefones(int n) {
-//		Query q = manager.query();
-//		q.constrain(Pessoa.class);
-//		q.constrain(new Filtro(n));
-//		List<Pessoa> result = q.execute(); 
-//		return result;
-//	}
-
-
-	
 }
 
 

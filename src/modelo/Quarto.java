@@ -50,16 +50,13 @@ public class Quarto {
 		}
 		return null;
 	}
-
-	@Override
-	public String toString() {
-		return "Quarto [ id=" + id + ", numero=" + numero + ", camas=" + camas + "]";
-	}
-
-
+	
 	public void remover(Cama c) {
 		this.camas.remove(c);
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Quarto [ id=" + id + ", numero=" + numero + ", camas=" + camas + "]";
+	}
 }

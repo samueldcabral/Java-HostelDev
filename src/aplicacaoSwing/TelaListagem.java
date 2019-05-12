@@ -19,22 +19,6 @@ public class TelaListagem extends JFrame {
 	private JTextArea textArea;
 	private JButton btnCriar;
 
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaListagem window = new TelaListagem();
-//					window.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	private String cls;
 	public TelaListagem(String classe) {
 		this.cls = classe;
@@ -65,7 +49,6 @@ public class TelaListagem extends JFrame {
 					}else {
 						textArea.setText("Seleçao Invalida");
 					}
-					
 				}
 				catch(Exception erro){
 					JOptionPane.showMessageDialog(null,erro.getMessage());
@@ -83,20 +66,5 @@ public class TelaListagem extends JFrame {
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scroll);
-//
-//		btnListarTelefones = new JButton("Listar Telefones");
-//		btnListarTelefones.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				try{
-//
-//					textArea.setText(Fachada.listarTelefones());
-//				}
-//				catch(Exception erro){
-//					JOptionPane.showMessageDialog(null,erro.getMessage());
-//				}
-//			}
-//		});
-//		btnListarTelefones.setBounds(306, 149, 115, 23);
-//		contentPane.add(btnListarTelefones);
 	}
 }

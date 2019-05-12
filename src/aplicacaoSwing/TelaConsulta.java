@@ -20,22 +20,7 @@ public class TelaConsulta extends JFrame {
 	private JButton btnPessoasComN;
 	private JButton btnTelefonesPorPrefixo;
 
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaListagem window = new TelaListagem();
-//					window.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
 	public TelaConsulta() {
 		setTitle("Consultar");
 		setResizable(false);
@@ -72,8 +57,6 @@ public class TelaConsulta extends JFrame {
 		btnPessoasComN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int n = Integer.parseInt( JOptionPane.showInputDialog("quantos telefones?") );
-//				textArea.setText(Fachada.consultarPessoasNTelefones(n));
-
 			}
 		});
 		btnPessoasComN.setBounds(429, 47, 210, 23);
@@ -83,9 +66,6 @@ public class TelaConsulta extends JFrame {
 		btnTelefonesPorPrefixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String prefixo = JOptionPane.showInputDialog("digite o prefixo");
-//				textArea.setText(Fachada.consultarTelefonesPorPrefixo(prefixo));
-
-			
 			}
 		});
 		btnTelefonesPorPrefixo.setBounds(429, 81, 210, 23);

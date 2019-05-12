@@ -26,29 +26,6 @@ public class TelaCadastro {
 	private DefaultListModel<String> model;
 	private JLabel label2;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaCadastro window = new TelaCadastro();
-//					window.frmCadastro.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
-	
-//	public TelaListagem() {
-//		
-//		
 	private String cls;
 	private JTextField textField_2;
 	private JTextField textField_4;
@@ -58,12 +35,9 @@ public class TelaCadastro {
 	public TelaCadastro(String classe) {
 		this.cls = classe;
 		initialize();
-
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	private void initialize() {
 	
 		frmCadastro = new JFrame();
@@ -277,96 +251,9 @@ public class TelaCadastro {
 					}
 				}
 				catch(Exception e) {
-					
 				}
 			}
 		});
-		
-		//mostrar a janela
 		frmCadastro.setVisible(true);
-		
 		}
 	}
-	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-//	private void cadastrarHospede() {
-//		frmCadastro = new JFrame();
-//		frmCadastro.setTitle("Cadastro");
-//		frmCadastro.setBounds(100, 100, 358, 431);
-//		frmCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//		frmCadastro.getContentPane().setLayout(null);
-//		
-//		label1 = new JLabel("Id:");
-//		label1.setBounds(61, 34, 46, 14);
-//		frmCadastro.getContentPane().add(label1);
-//		
-//		label2 = new JLabel("Nome:");
-//		label2.setBounds(45, 76, 76, 14);
-//		frmCadastro.getContentPane().add(label2);
-//		
-//		JLabel label3 = new JLabel("Telefone:");
-//		label3.setBounds(21, 115, 86, 14);
-//		frmCadastro.getContentPane().add(label3);
-//		
-//		JLabel label4 = new JLabel("Salario");
-//		label4.setBounds(21, 159, 86, 14);
-//		frmCadastro.getContentPane().add(label4);
-//		
-//		final JLabel label5 = new JLabel("Resultado:");
-//		label5.setBounds(10, 237, 189, 14);
-//		frmCadastro.getContentPane().add(label5);
-//		
-//		textField = new JTextField();
-//		textField.setBounds(94, 31, 95, 20);
-//		frmCadastro.getContentPane().add(textField);
-//		textField.setColumns(10);
-//		
-//		textField_1 = new JTextField();
-//		textField_1.setColumns(10);
-//		textField_1.setBounds(94, 73, 105, 20);
-//		frmCadastro.getContentPane().add(textField_1);
-//		
-//		final JTextField textField_2 = new JTextField();
-//		textField_2.setBounds(94, 112, 95, 20);
-//		frmCadastro.getContentPane().add(textField_2);
-//		textField_2.setColumns(10);
-//		
-//		textField_3 = new JTextField();
-//		textField_3.setColumns(10);
-//		textField_3.setBounds(94, 157, 105, 20);
-//		frmCadastro.getContentPane().add(textField_3);
-//		
-//		button2.setBounds(84, 296, 145, 23);
-//		frmCadastro.getContentPane().add(button2);
-//		
-//		button2 = new JButton("Cadastrar Pessoa");
-//		button2.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				try {
-//					String idHospede = textField.getText();
-//					String nomeHospede = textField_1.getText();
-//					String telefoneHospede = textField_2.getText();
-//					
-//					if(!idHospede.isEmpty() && !nomeHospede.isEmpty()) {
-//						Fachada.cadastrarHospede(idHospede, nomeHospede, telefoneHospede);
-//						label4.setText("Resultado: cadastro concluido");
-//					}else {
-//						label4.setText("Resultado: Erro! Cadastro nao realizado");
-//					}
-//	
-//					textField.setText("");
-//					textField_1.setText("");
-//					textField_2.setText("");
-//				}
-//				catch(Exception e) {
-//					
-//				}
-//			}
-//		});
-//		
-//		//mostrar a janela
-//		frmCadastro.setVisible(true);
-//	}
-//}

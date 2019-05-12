@@ -1,8 +1,4 @@
-/**********************************
- * IFPB - Curso Superior de Tec. em Sist. para Internet
- * Persistencia de Objetos
- * Prof. Fausto Maranhão Ayres
- **********************************/
+
 
 package dao;
 
@@ -74,7 +70,7 @@ public abstract class DAO<T> implements DAOInterface<T> {
 		config.common().objectClass(Hospedagem.class).cascadeOnDelete(true);
 		config.common().objectClass(Hospedagem.class).cascadeOnActivate(true);
 		
-		// 		indexacao de atributos
+		//indexacao de atributos
 		config.common().objectClass(Pessoa.class).objectField("id").indexed(true);
 		config.common().objectClass(Pessoa.class).objectField("nome").indexed(true);
 		manager = 	Db4oEmbedded.openFile(config, "banco.db4o");

@@ -95,35 +95,19 @@ public class Cadastrar {
 			prod=Fachada.adicionarProdutoHospedagem("Pizza Calabresa", "2");
 			prod=Fachada.adicionarProdutoHospedagem("Pizza Calabresa", "1");
 			
-			
-//			p=Fachada.cadastrarPessoa("maria");
-//			t=Fachada.adicionarTelefonePessoa("maria","87882222");
-//			t=Fachada.adicionarTelefonePessoa("maria","88883333");
-//
-//			p=Fachada.cadastrarPessoa("jose");
-//			t=Fachada.adicionarTelefonePessoa("jose","87884444");
-//
-//			p=Fachada.cadastrarAluno("paulo", 9);
-//			p=Fachada.cadastrarProfessor("fausto", 1000.0);
-			
-			
-		} catch (Exception e) {System.out.println(e.getMessage());}
-		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 		Fachada.finalizar();
 		System.out.println("fim do programa");
 	}
 
-
 	public void cadastrar(){
 
 	}	
 
-
-	//=================================================
 	public static void main(String[] args) {
 		new Cadastrar();
 	}
 }
-
-

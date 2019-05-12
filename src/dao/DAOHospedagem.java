@@ -1,6 +1,4 @@
-/**IFPB - Curso SI - Disciplina de POB
- * @author Prof Fausto Ayres
- */
+
 package dao;
 
 import java.util.List;

@@ -35,9 +35,6 @@ public class TelaPrincipal {
 	private JMenu mnFuncionario;
 	private JMenu mnHospede;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,32 +48,23 @@ public class TelaPrincipal {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public TelaPrincipal() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		try {
 			frmPrincipal = new JFrame() { 
 			  private Image backgroundImage = ImageIO.read(new File("Resources/img/HostelDev.png"));
-			  //private Image backgroundImage = ImageIO.read(getClass().getResource("Resources/img/HostelDev.png"));
-
+			  
 			  public void paint( Graphics g ) { 
 			    super.paint(g);
 			    g.drawImage(backgroundImage, 0, 60, null);
 			  }
 			};
 		} catch (HeadlessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -97,21 +85,6 @@ public class TelaPrincipal {
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
 
-		
-//		BufferedImage myPicture = null;
-//		try {
-//			myPicture = ImageIO.read(new File("img/HostelDev.png"));
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		frmPrincipal.setLayout(null);
-//		
-//		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-//		picLabel.setBounds(-154, -61, 1391, 1011);
-//		frmPrincipal.add(picLabel);
-		
-		
 		JMenuBar menuBar = new JMenuBar();
 		frmPrincipal.setJMenuBar(menuBar);
 		
@@ -147,6 +120,7 @@ public class TelaPrincipal {
 		mnHospede.add(mntmAlterarDeletar);
 
 		// FUNCIONARIO MENU BAR
+		
 		mnFuncionario = new JMenu("Funcionario");
 		menuBar.add(mnFuncionario);
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
@@ -175,6 +149,7 @@ public class TelaPrincipal {
 		mnFuncionario.add(mntmAlterarDeletar);
 		
 		//HOSPEDAGENS MENU BAR
+		
 		JMenu mnHospededagem = new JMenu("Hospedagem");
 		menuBar.add(mnHospededagem);
 
@@ -205,6 +180,7 @@ public class TelaPrincipal {
 		mnHospededagem.add(mntmAlterarDeletar);
 		
 		//PRODUTO MENU BAR
+		
 		JMenu mnProduto = new JMenu("Produto");
 		menuBar.add(mnProduto);
 
@@ -235,6 +211,7 @@ public class TelaPrincipal {
 		mnProduto.add(mntmAlterarDeletar);
 		
 		//QUARTO MENU BAR
+		
 		JMenu mnQuarto = new JMenu("Quarto");
 		menuBar.add(mnQuarto);
 
@@ -265,6 +242,7 @@ public class TelaPrincipal {
 		mnQuarto.add(mntmAlterarDeletar);
 		
 		//CAMA MENU BAR
+		
 		JMenu mnCama = new JMenu("Cama");
 		menuBar.add(mnCama);
 
@@ -295,22 +273,15 @@ public class TelaPrincipal {
 		mnCama.add(mntmAlterarDeletar);
 		
 		//CONSULTAS MENU BAR
+		
 		mnConsulta = new JMenu("Consultas");
 		mnConsulta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				TelaConsulta j = new TelaConsulta();
 				j.setVisible(true);
-
-			
 			}
 		});
 		menuBar.add(mnConsulta);
-	
-	
-
-			
-	
 		}
 	}
-

@@ -110,16 +110,13 @@ public class Fachada {
 		return (Produto) p;
 	}
 	
-	public static Hospedagem cadastrarHospedagem(String id, String hospede, String funcionario, String quarto, String cama) throws  Exception{
-	//public static Hospedagem cadastrarHospedagem(String id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) throws  Exception{
-		
+	public static Hospedagem cadastrarHospedagem(String id, String hospede, String funcionario, String quarto, String cama) throws  Exception{		
 		DAO.begin();	
 		Hospedagem h = daohospedagem.read(id);
+		
 		if(h != null)
 			throw new Exception("cadastrar Hospedagem - Hospedagem ja cadastrado:" + h);
-		
-		//(refatorar parte abaixo)
-		
+				
 		Hospede ho = daohospede.read(hospede);
 		if(ho == null)
 			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + ho);
@@ -136,7 +133,6 @@ public class Fachada {
 		if(c == null)
 			throw new Exception("cadastrar hospedagem - Cama nao cadastrado!: " + c);
 
-		//(ate aqui)
 		h = new Hospedagem(id, ho, f, q, c);
 		ho.adicionarHospedagem(h);
 		ho.setIdHospedagens(h.getId());
@@ -466,6 +462,7 @@ public class Fachada {
 	 * CONSULTAS  (TO DO)
 	 * 
 	 **********************************************************/
+	
 	public static String consultarPessoasPorParteNome(String caracteres) {
 		List<Pessoa> result = daopessoa.consultarPessoasPorParteNome(caracteres);
 
@@ -477,25 +474,12 @@ public class Fachada {
 		return texto;
 	}
 
-
-//	public static String consultarPessoasNTelefones(int n) {
-//		List<Pessoa> result = daopessoa.consultarPessoasNTelefones(n);
-//
-//		String texto = "\nConsultar pessoas com "+n+" telefones:";
-//		if (result.isEmpty())  
-//			texto += "consulta vazia";
-//		else 
-//			for(Pessoa p: result)texto += "\n" + p;
-//		return texto;
-//	}
-
 	public static String consultarPessoaPorNumero(String n) {
 		Pessoa result = daopessoa.consultarPessoaPorNumero(n);
 		if(result==null)
 			return "\nConsultar pessoa do numero "+n+"  nao encontrado";
 		else
 			return "\nConsultar pessoa do numero "+n+" => " +result.getNome();
-
 	}
 	
 	// CONSULTAS USANDO 3 CLASSES
@@ -550,29 +534,4 @@ public class Fachada {
 		}
 		return nomesFuncionarios;
 	}
-	
-	
-
-//	public static String consultarTelefonesPorNome(String n) {
-//		List<Telefone> result = daotelefone.consultarTelefonesPorNome(n);
-//		String texto = "\nConsultar telefones de " + n;
-//		if (result.isEmpty())  
-//			texto += "consulta vazia";
-//		else 
-//			for(Telefone t: result)texto += "\n" + t;
-//		return texto;
-//	}
-//
-//	public static String consultarTelefonesPorPrefixo(String prefixo) {
-//		List<Telefone> result = daotelefone.consultarTelefonesPorPrefixo(prefixo);
-//		String texto = "\nConsultar telefones do prefixo " + prefixo;
-//		if (result.isEmpty())  
-//			texto += "consulta vazia";
-//		else 
-//			for(Telefone t: result)texto += "\n" + t;
-//		return texto;
-//	}
-
-
-
 }

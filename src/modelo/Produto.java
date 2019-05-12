@@ -61,17 +61,6 @@ public class Produto {
 	public void removerHospedagens(Hospedagem h) {
 		this.hospedagens.remove(h);
 	}
-	
-//	public ArrayList<Hospedagem> getHospedagens() {
-//		return hospedagens;
-//	}
-
-//	public void setHospedagem(Hospedagem hosps) {
-//		System.out.println("cabral");
-//		this.hospedagens.remove(hosps);
-//		System.out.println("samuel");
-//	}
-	
 
 	public ArrayList<String> getIdHospedagens() {
 		return idHospedagens;

@@ -1,12 +1,10 @@
 package aplicacaoTeste;
 
-
 import com.db4o.query.Candidate;
 import com.db4o.query.Evaluation;
 
 import fachada.Fachada;
 import modelo.Pessoa;
-
 
 public class Consultar {
 
@@ -21,7 +19,6 @@ public class Consultar {
 			System.out.println(Fachada.consultarProdutosDeTodasHospedagensDoHospede("Alice Sara"));
 			System.out.println(Fachada.consultarValorGastoPorProdutosNaHospedagemHospede("Vicente Benício Santos"));
 			System.out.println(Fachada.consultarFuncionarioCadastrouHospede("Vicente Benício Santos"));
-			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -30,11 +27,7 @@ public class Consultar {
 		System.out.println("fim do programa");
 	}
 
-
-
-	//=================================================
 	public static void main(String[] args) {
 		new Consultar();
 	}
 }
-

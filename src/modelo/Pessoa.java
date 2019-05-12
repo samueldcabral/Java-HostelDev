@@ -6,8 +6,6 @@ public class Pessoa{
 	protected String nome;
 	private LocalDate dataCadastro;
 	protected String telefone;
-	
-
 
 	public Pessoa(String nome, String telefone) {
 		super();
