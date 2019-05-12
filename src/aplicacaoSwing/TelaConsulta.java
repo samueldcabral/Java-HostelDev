@@ -72,7 +72,7 @@ public class TelaConsulta extends JFrame {
 		btnPessoasComN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int n = Integer.parseInt( JOptionPane.showInputDialog("quantos telefones?") );
-				textArea.setText(Fachada.consultarPessoasNTelefones(n));
+//				textArea.setText(Fachada.consultarPessoasNTelefones(n));
 
 			}
 		});
@@ -83,7 +83,7 @@ public class TelaConsulta extends JFrame {
 		btnTelefonesPorPrefixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String prefixo = JOptionPane.showInputDialog("digite o prefixo");
-				textArea.setText(Fachada.consultarTelefonesPorPrefixo(prefixo));
+//				textArea.setText(Fachada.consultarTelefonesPorPrefixo(prefixo));
 
 			
 			}

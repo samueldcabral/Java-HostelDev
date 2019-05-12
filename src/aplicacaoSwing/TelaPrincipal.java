@@ -1,6 +1,9 @@
 package aplicacaoSwing;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -58,23 +61,38 @@ public class TelaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmPrincipal = new JFrame();
+		try {
+			frmPrincipal = new JFrame() { 
+			  private Image backgroundImage = ImageIO.read(new File("Resources/img/HostelDev.png"));
+			  //private Image backgroundImage = ImageIO.read(getClass().getResource("Resources/img/HostelDev.png"));
 
+			  public void paint( Graphics g ) { 
+			    super.paint(g);
+			    g.drawImage(backgroundImage, 0, 60, null);
+			  }
+			};
+		} catch (HeadlessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		frmPrincipal.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				Fachada.inicializar();
-				JOptionPane.showMessageDialog(null, "sistema inicializado !");
+				//JOptionPane.showMessageDialog(null, "sistema inicializado !");
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
 				Fachada.finalizar();
-				JOptionPane.showMessageDialog(null, "sistema finalizado !");
+				//JOptionPane.showMessageDialog(null, "sistema finalizado !");
 			}
 		});
 		frmPrincipal.setTitle("Agenda");
-		frmPrincipal.setBounds(1200, 300, 624, 306);
+		frmPrincipal.setBounds(600, 30, 1077, 973);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.getContentPane().setLayout(null);
 
@@ -104,7 +122,7 @@ public class TelaPrincipal {
 		mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastro j = new TelaCadastro();
+				TelaCadastro j = new TelaCadastro("Hospede");
 			}
 
 		});
@@ -126,6 +144,7 @@ public class TelaPrincipal {
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro j = new TelaCadastro("Funcionario");
 			}
 		});
 		mnFuncionario.add(mntmCadastrar);
@@ -146,7 +165,7 @@ public class TelaPrincipal {
 		JMenuItem mntmCadastrar_2 = new JMenuItem("Cadastrar");
 		mntmCadastrar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastro j = new TelaCadastro();
+				TelaCadastro j = new TelaCadastro("Hospedagem");
 			}
 
 		});
@@ -161,16 +180,89 @@ public class TelaPrincipal {
 		});
 		mnHospededagem.add(mntmListar_2);
 		
-				mnConsulta = new JMenu("Consultas");
-				mnConsulta.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						TelaConsulta j = new TelaConsulta();
-						j.setVisible(true);
+		//PRODUTO MENU BAR
+		JMenu mnProduto = new JMenu("Produto");
+		menuBar.add(mnProduto);
 
-					
-					}
-				});
-				menuBar.add(mnConsulta);
+		JMenuItem mntmCadastrar_3 = new JMenuItem("Cadastrar");
+		mntmCadastrar_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro j = new TelaCadastro("Produto");
+			}
+
+		});
+		mnProduto.add(mntmCadastrar_3);
+
+		JMenuItem mntmListar_3 = new JMenuItem("Listar");
+		mntmListar_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaListagem j = new TelaListagem("Produto");
+				j.setVisible(true);
+			}
+		});
+		mnProduto.add(mntmListar_3);
+		
+		//QUARTO MENU BAR
+		JMenu mnQuarto = new JMenu("Quarto");
+		menuBar.add(mnQuarto);
+
+		JMenuItem mntmCadastrar_4 = new JMenuItem("Cadastrar");
+		mntmCadastrar_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro j = new TelaCadastro("Quarto");
+			}
+
+		});
+		mnQuarto.add(mntmCadastrar_4);
+
+		JMenuItem mntmListar_4 = new JMenuItem("Listar");
+		mntmListar_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaListagem j = new TelaListagem("Quarto");
+				j.setVisible(true);
+			}
+		});
+		mnQuarto.add(mntmListar_4);
+		
+		//CAMA MENU BAR
+		JMenu mnCama = new JMenu("Cama");
+		menuBar.add(mnCama);
+
+		JMenuItem mntmCadastrar_5 = new JMenuItem("Cadastrar");
+		mntmCadastrar_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastro j = new TelaCadastro("Cama");
+			}
+
+		});
+		mnCama.add(mntmCadastrar_5);
+
+		JMenuItem mntmListar_5 = new JMenuItem("Listar");
+		mntmListar_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaListagem j = new TelaListagem("Cama");
+				j.setVisible(true);
+			}
+		});
+		mnCama.add(mntmListar_5);
+				
+		//CONSULTAS MENU BAR
+		mnConsulta = new JMenu("Consultas");
+		mnConsulta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				TelaConsulta j = new TelaConsulta();
+				j.setVisible(true);
+
+			
+			}
+		});
+		menuBar.add(mnConsulta);
+	
+	
+
+			
+	
+		}
 	}
-}
+

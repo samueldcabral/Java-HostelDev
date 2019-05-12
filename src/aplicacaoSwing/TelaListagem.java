@@ -12,12 +12,12 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
 import fachada.Fachada;
+import java.awt.Font;
 
 public class TelaListagem extends JFrame {
 	private JPanel contentPane;
 	private JTextArea textArea;
 	private JButton btnCriar;
-	private JButton btnListarTelefones;
 
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
@@ -39,9 +39,8 @@ public class TelaListagem extends JFrame {
 	public TelaListagem(String classe) {
 		this.cls = classe;
 		setTitle("Listar");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(1200, 300, 550, 211);
+		setBounds(700, 150, 869, 403);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,8 +56,14 @@ public class TelaListagem extends JFrame {
 						textArea.setText(Fachada.listarFuncionarios());
 					}else if(cls.equals("Hospedagem")) {
 						textArea.setText(Fachada.listarHospedagens());
+					}else if(cls.equals("Produto")) {
+						textArea.setText(Fachada.listarProdutos());
+					}else if(cls.equals("Quarto")) {
+						textArea.setText(Fachada.listarQuartos());
+					}else if(cls.equals("Cama")) {
+						textArea.setText(Fachada.listarCamas());
 					}else {
-						textArea.setText("waht");
+						textArea.setText("Seleçao Invalida");
 					}
 					
 				}
@@ -67,12 +72,14 @@ public class TelaListagem extends JFrame {
 				}
 			}
 		});
-		btnCriar.setBounds(86, 149, 115, 23);
+		btnCriar.setBounds(24, 270, 175, 56);
 		contentPane.add(btnCriar);
 
 		textArea = new JTextArea();
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		textArea.setLineWrap(true);
 		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(24, 29, 510, 109);
+		scroll.setBounds(24, 29, 793, 210);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scroll);
