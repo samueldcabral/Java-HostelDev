@@ -24,7 +24,7 @@ public class TelaListagem extends JFrame {
 		this.cls = classe;
 		setTitle("Listar");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(700, 150, 869, 403);
+		setBounds(700, 150, 899, 573);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,14 +55,14 @@ public class TelaListagem extends JFrame {
 				}
 			}
 		});
-		btnCriar.setBounds(24, 270, 175, 56);
+		btnCriar.setBounds(339, 457, 175, 56);
 		contentPane.add(btnCriar);
 
 		textArea = new JTextArea();
-		textArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		textArea.setFont(new Font("Bahnschrift", Font.PLAIN, 19));
 		textArea.setLineWrap(true);
 		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(24, 29, 793, 210);
+		scroll.setBounds(12, 29, 857, 422);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scroll);

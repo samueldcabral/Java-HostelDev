@@ -81,9 +81,8 @@ public class TelaPrincipal {
 			}
 		});
 		frmPrincipal.setTitle("Agenda");
-		frmPrincipal.setBounds(600, 30, 1077, 973);
+		frmPrincipal.setBounds(600, 30, 1072, 914);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmPrincipal.getContentPane().setLayout(null);
 
 		JMenuBar menuBar = new JMenuBar();
 		frmPrincipal.setJMenuBar(menuBar);
@@ -283,5 +282,6 @@ public class TelaPrincipal {
 			}
 		});
 		menuBar.add(mnConsulta);
+		frmPrincipal.getContentPane().setLayout(null);
 		}
 	}
