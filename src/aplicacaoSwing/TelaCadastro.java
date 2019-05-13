@@ -31,6 +31,9 @@ public class TelaCadastro {
 	private JTextField textField_4;
 	private JLabel lblIdcama;
 	private JTextField textField_5;
+	private JLabel label6;
+	private JTextField textField_6;
+	private JButton btnAdicionar;
 	
 	public TelaCadastro(String classe) {
 		this.cls = classe;
@@ -66,9 +69,13 @@ public class TelaCadastro {
 		label5.setBounds(21, 198, 86, 14);
 		frmCadastro.getContentPane().add(label5);
 		
-		final JLabel label6 = new JLabel("Resultado:");
-		label6.setBounds(10, 237, 189, 14);
+		label6 = new JLabel("idProduto");
+		label6.setBounds(21, 244, 86, 14);
 		frmCadastro.getContentPane().add(label6);
+		
+		final JLabel label7 = new JLabel("Resultado:");
+		label7.setBounds(12, 275, 189, 14);
+		frmCadastro.getContentPane().add(label7);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(150, 31, 95, 20);
@@ -95,15 +102,30 @@ public class TelaCadastro {
 		textField_5.setBounds(141, 195, 105, 20);
 		frmCadastro.getContentPane().add(textField_5);
 		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(140, 241, 105, 20);
+		frmCadastro.getContentPane().add(textField_6);
+		
+		btnAdicionar = new JButton("Adicionar: " + cls);
+		btnAdicionar.setBounds(100, 354, 167, 25);
+		frmCadastro.getContentPane().add(btnAdicionar);
+		
 		if(cls.equals("Hospede")) {
 			label4.setVisible(false);
 			textField_4.setVisible(false);
 			label5.setVisible(false);
 			textField_5.setVisible(false);
+			textField_6.setVisible(false);
+			textField_6.setVisible(false);
+			btnAdicionar.setVisible(false);
 			
 		} else if(cls.equals("Funcionario")) {
 			label5.setVisible(false);
 			textField_5.setVisible(false);
+			textField_6.setVisible(false);
+			textField_6.setVisible(false);
+			btnAdicionar.setVisible(false);
 			
 		} else if(cls.equals("Hospedagem")) {
 			label2.setText("Nome Hospede");
@@ -115,6 +137,9 @@ public class TelaCadastro {
 			label4.setText("valor");
 			label5.setVisible(false);
 			textField_5.setVisible(false);
+			textField_6.setVisible(false);
+			textField_6.setVisible(false);
+			btnAdicionar.setVisible(false);
 			
 		} else if(cls.equals("Cama")) {
 			label2.setText("Numero");
@@ -123,22 +148,28 @@ public class TelaCadastro {
 			textField_4.setVisible(false);
 			label5.setVisible(false);
 			textField_5.setVisible(false);
+			textField_6.setVisible(false);
+			textField_6.setVisible(false);
+			btnAdicionar.setVisible(false);
 			
 		} else if(cls.equals("Quarto")) {
 			label2.setText("Numero");
-			label3.setVisible(false);
-			textField_3.setVisible(false);
+			label3.setText("idCama");
+		
 			label4.setVisible(false);
 			textField_4.setVisible(false);
 			label5.setVisible(false);
+			label6.setVisible(false);
 			textField_5.setVisible(false);
+			textField_6.setVisible(false);
+			 
 			
 		}else {
 			System.out.println("erro");
 		}
 
 		JButton btnNewButton = new JButton("Cadastrar " + cls);
-		btnNewButton.setBounds(102, 304, 167, 25);
+		btnNewButton.setBounds(100, 316, 167, 25);
 		frmCadastro.getContentPane().add(btnNewButton);
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -151,9 +182,9 @@ public class TelaCadastro {
 						
 						if(!idHospede.isEmpty() && !nomeHospede.isEmpty()) {
 							Fachada.cadastrarHospede(idHospede, nomeHospede, telefoneHospede);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
@@ -168,9 +199,9 @@ public class TelaCadastro {
 						
 						if(!idFuncionario.isEmpty() && !nomeFuncionario.isEmpty()) {
 							Fachada.cadastrarFuncionario(idFuncionario, nomeFuncionario, telefoneFuncionario, salarioFuncionario);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
@@ -187,9 +218,9 @@ public class TelaCadastro {
 						
 						if(!idHospedagem.isEmpty() && !nomeHospede.isEmpty() && !idQuarto.isEmpty() && !idCama.isEmpty()) {
 							Fachada.cadastrarHospedagem(idHospedagem, nomeHospede, nomeFuncionario, idQuarto, idCama);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
@@ -206,9 +237,9 @@ public class TelaCadastro {
 						
 						if(!idProduto.isEmpty() && !nomeProduto.isEmpty()) {
 							Fachada.cadastrarProduto(idProduto, nomeProduto, descricaoProduto, valorProduto);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
@@ -223,9 +254,9 @@ public class TelaCadastro {
 						
 						if(!idCama.isEmpty() && !numeroCama.isEmpty()) {
 							Fachada.cadastrarCama(idCama, numeroCama, descricaoCama);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
@@ -238,13 +269,54 @@ public class TelaCadastro {
 						
 						if(!idQuarto.isEmpty() && !numeroQuarto.isEmpty()) {
 							Fachada.cadastrarQuarto(idQuarto, numeroQuarto);
-							label6.setText("Resultado: cadastro concluido");
+							label7.setText("Resultado: cadastro concluido");
 						}else {
-							label6.setText("Resultado: Erro! Cadastro nao realizado");
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
 						}
 		
 						textField_1.setText("");
 						textField_2.setText("");
+						
+					}else {
+						System.out.println("erro");
+					}
+				}
+				catch(Exception e) {
+				}
+			}
+		});
+		
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if(cls.equals("Hospedagem")) {
+						String idHospedagem = textField_1.getText();
+						String nomeProduto = textField_6.getText();
+
+						
+						if(!idHospedagem.isEmpty() && !nomeProduto.isEmpty()) {
+							Fachada.adicionarProdutoHospedagem(nomeProduto, idHospedagem);
+							label7.setText("Resultado: Adicionar concluido");
+						}else {
+							label7.setText("Resultado: Erro! Adicionar nao realizado");
+						}
+		
+						textField_1.setText("");
+						textField_6.setText("");
+						
+					} else if(cls.equals("Quarto")) {
+						String idQuarto = textField_1.getText();
+						String idCama = textField_3.getText();
+						
+						if(!idQuarto.isEmpty() && !idCama.isEmpty()) {
+							Fachada.adicionarCamaQuarto(idCama, idQuarto);
+							label7.setText("Resultado: cadastro concluido");
+						}else {
+							label7.setText("Resultado: Erro! Cadastro nao realizado");
+						}
+		
+						textField_1.setText("");
+						textField_3.setText("");
 						
 					}else {
 						System.out.println("erro");
