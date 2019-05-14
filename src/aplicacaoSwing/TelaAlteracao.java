@@ -120,8 +120,10 @@ public class TelaAlteracao {
 			label4.setText("IdQuarto");
 			
 		} else if(cls.equals("Produto")) {
-			label3.setText("Descricao");
-			label4.setText("valor");
+			label1.setText("Nome: ");
+			label2.setText("Novo Nome:");
+			label3.setText("Nova Descricao");
+			label4.setText("Novo valor");
 			label5.setVisible(false);
 			textField_5.setVisible(false);
 			
@@ -177,7 +179,7 @@ public class TelaAlteracao {
 						String novoSalario = textField_3.getText();
 						
 						if(!nomeFuncionario.isEmpty() && !novoSalario.isEmpty() && !novoFuncionario.isEmpty()) {
-							Fachada.alterarFuncionario(nomeFuncionario, "", Double.parseDouble(novoSalario));
+							Fachada.alterarFuncionario(nomeFuncionario, Fachada.listarFuncionario(nomeFuncionario).getMatricula(), Double.parseDouble(novoSalario));
 							Fachada.alterarPessoa(nomeFuncionario, novoFuncionario);
 							label6.setText("Resultado: Alteracao concluida");
 						}else if(!nomeFuncionario.isEmpty() && !novoFuncionario.isEmpty()){
@@ -192,33 +194,33 @@ public class TelaAlteracao {
 						textField_3.setText("");
 						
 					} else if(cls.equals("Hospedagem")) {
-						String idHospedagem = textField_1.getText();
-						String nomeHospede = textField_2.getText();
-						String nomeFuncionario = textField_3.getText();
-						String idQuarto = textField_4.getText();
-						String idCama = textField_5.getText();
-						
-						if(!idHospedagem.isEmpty() && !nomeHospede.isEmpty() && !idQuarto.isEmpty() && !idCama.isEmpty()) {
-							Fachada.cadastrarHospedagem(idHospedagem, nomeHospede, nomeFuncionario, idQuarto, idCama);
-							label6.setText("Resultado: Alteracao concluido");
-						}else {
-							label6.setText("Resultado: Erro! Alteracao nao realizado");
-						}
-		
-						textField_1.setText("");
-						textField_2.setText("");
-						textField_3.setText("");
-						textField_4.setText("");
-						textField_5.setText("");
+//						String idHospedagem = textField_1.getText();
+//						String nomeHospede = textField_2.getText();
+//						String nomeFuncionario = textField_3.getText();
+//						String idQuarto = textField_4.getText();
+//						String idCama = textField_5.getText();
+//						
+//						if(!idHospedagem.isEmpty() && !nomeHospede.isEmpty() && !idQuarto.isEmpty() && !idCama.isEmpty()) {
+//							Fachada.cadastrarHospedagem(idHospedagem, nomeHospede, nomeFuncionario, idQuarto, idCama);
+//							label6.setText("Resultado: Alteracao concluido");
+//						}else {
+//							label6.setText("Resultado: Erro! Alteracao nao realizado");
+//						}
+//		
+//						textField_1.setText("");
+//						textField_2.setText("");
+//						textField_3.setText("");
+//						textField_4.setText("");
+//						textField_5.setText("");
 						
 					} else if(cls.equals("Produto")) {
-						String idProduto = textField_1.getText();
-						String nomeProduto = textField_2.getText();
+						String nomeProduto = textField_1.getText();
+						String novoNomeProduto = textField_2.getText();
 						String descricaoProduto = textField_3.getText();
 						Double valorProduto = Double.parseDouble(textField_4.getText());
 						
-						if(!idProduto.isEmpty() && !nomeProduto.isEmpty()) {
-							Fachada.cadastrarProduto(idProduto, nomeProduto, descricaoProduto, valorProduto);
+						if(!nomeProduto.isEmpty() && !novoNomeProduto.isEmpty()) {
+							Fachada.alterarProduto(nomeProduto, novoNomeProduto, descricaoProduto, valorProduto);
 							label6.setText("Resultado: Alteracao concluido");
 						}else {
 							label6.setText("Resultado: Erro! Alteracao nao realizado");
@@ -235,7 +237,7 @@ public class TelaAlteracao {
 						String descricaoCama = textField_3.getText();
 						
 						if(!idCama.isEmpty() && !numeroCama.isEmpty()) {
-							Fachada.cadastrarCama(idCama, numeroCama, descricaoCama);
+//							Fachada.cadastrarCama(idCama, numeroCama, descricaoCama);
 							label6.setText("Resultado: Alteracao concluido");
 						}else {
 							label6.setText("Resultado: Erro! Alteracao nao realizado");
@@ -250,7 +252,7 @@ public class TelaAlteracao {
 						String numeroQuarto = textField_2.getText();
 						
 						if(!idQuarto.isEmpty() && !numeroQuarto.isEmpty()) {
-							Fachada.cadastrarQuarto(idQuarto, numeroQuarto);
+//							Fachada.cadastrarQuarto(idQuarto, numeroQuarto);
 							label6.setText("Resultado: Alteracao concluido");
 						}else {
 							label6.setText("Resultado: Erro! Alteracao nao realizado");

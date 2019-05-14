@@ -232,13 +232,13 @@ public class TelaPrincipal {
 		});
 		mnQuarto.add(mntmListar_4);
 		
-		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
-		mntmAlterarDeletar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaAlteracao j = new TelaAlteracao("Quarto");
-			}
-		});
-		mnQuarto.add(mntmAlterarDeletar);
+//		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+//		mntmAlterarDeletar.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				TelaAlteracao j = new TelaAlteracao("Quarto");
+//			}
+//		});
+//		mnQuarto.add(mntmAlterarDeletar);
 		
 		//CAMA MENU BAR
 		
@@ -263,13 +263,13 @@ public class TelaPrincipal {
 		});
 		mnCama.add(mntmListar_5);
 		
-		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
-		mntmAlterarDeletar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaAlteracao j = new TelaAlteracao("Cama");
-			}
-		});
-		mnCama.add(mntmAlterarDeletar);
+//		mntmAlterarDeletar = new JMenuItem("Alterar/Deleter");
+//		mntmAlterarDeletar.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				TelaAlteracao j = new TelaAlteracao("Cama");
+//			}
+//		});
+//		mnCama.add(mntmAlterarDeletar);
 		
 		//CONSULTAS MENU BAR
 		

@@ -152,6 +152,9 @@ public class Fachada {
 		if(hospedagemAberta != false) 
 			throw new Exception("cadastrar hospedagem - hospedagem aberta no sistema: " + hospedagemAberta);
 		
+		if(funcionario.equals("")) {
+			funcionario = "Kamilly Antonia Aurora";
+		}
 		Funcionario f = daofuncionario.read(funcionario);
 		if(f == null)
 			throw new Exception("cadastrar hospedagem - Funcionario nao cadastrado!: " + funcionario);
@@ -448,6 +451,17 @@ public class Fachada {
 //	}
 	
 	// LISTAR (TO DO)
+	public static Hospedagem pegarHospedagemAbertaHospede(String nome) throws Exception {
+		Hospede h = daohospede.read(nome);
+		List<Hospedagem> hospedagens = h.getHospedagens();
+		
+		for(Hospedagem hos : hospedagens) {
+			if(hos.getStatusHospedagem()) {
+				return hos;
+			}
+		}
+		return null;
+	}
 	
 	public static String listarCamas(){
 		List<Cama> camas = daocama.readAll();
@@ -465,6 +479,15 @@ public class Fachada {
 			texto += f +"\n\n";
 		}
 		return texto;
+	}
+	
+	public static Funcionario listarFuncionario(String nome) throws Exception{
+		Funcionario funcs = daofuncionario.read(nome);
+		if(funcs == null)
+			throw new Exception("Funcinario nao existe: " + nome);
+		String texto="-----------Funcionarios-----------\n";
+	
+		return funcs;
 	}
 	
 	public static String listarHospedagens(){
