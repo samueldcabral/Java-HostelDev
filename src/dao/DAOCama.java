@@ -14,10 +14,10 @@ public class DAOCama  extends DAO<Cama>{
 
 	//Leitura POR id 
 	public Cama read (Object chave) {
-		String id = (String) chave;
+		int id = (Integer) chave;
 		Query q = manager.query();
 		q.constrain(Cama.class);
-		q.descend("id").constrain(id);
+		q.descend("numero").constrain(id);
 		List<Cama> resultados = q.execute();
 		if (resultados.size()>0)
 			return resultados.get(0);

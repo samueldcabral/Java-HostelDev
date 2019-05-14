@@ -1,28 +1,22 @@
 package modelo;
 
 public class Cama {
-	private String id;
-	private String numero;
+	private int numero;
 	private String tipo;
 	private Quarto quarto; 
-	private String nomeQuarto;
+	private int numeroQuarto;
 	
-	public Cama(String id, String numero, String tipo) {
-		this.id = id;
+	public Cama(int numero, String tipo) {
 		this.numero = numero;
 		this.tipo = tipo;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
+	}
+	
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public Quarto getQuarto() {
@@ -33,10 +27,6 @@ public class Cama {
 		this.quarto = quarto;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
 	public String getTipo() {
 		return tipo;
 	}
@@ -45,17 +35,17 @@ public class Cama {
 		this.tipo = tipo;
 	}
 	
-	public String getNomeQuarto() {
-		return nomeQuarto;
+	public int getNumeroQuarto() {
+		return numeroQuarto;
 	}
 
-	public void setNomeQuarto(String nomeQuarto) {
-		this.nomeQuarto = nomeQuarto;
+	public void setNumeroQuarto(int numeroQuarto) {
+		this.numeroQuarto = numeroQuarto;
 	}
 	
 	@Override
 	public String toString() {
-		return "Cama [id=" + id + ", numero=" + numero + ", tipo=" + tipo + ", Quarto=" + nomeQuarto + "]";
+		return "Cama [numero=" + numero + ", tipo=" + tipo + ", numeroQuarto=" + numeroQuarto + "]";
 	}
 
 }

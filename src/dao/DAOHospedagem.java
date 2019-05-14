@@ -18,7 +18,7 @@ public class DAOHospedagem  extends DAO<Hospedagem>{
 
 	//Leitura POR id 
 	public Hospedagem read (Object chave) {
-		String id = (String) chave;
+		int id = (Integer) chave;
 		Query q = manager.query();
 		q.constrain(Hospedagem.class);
 		q.descend("id").constrain(id);

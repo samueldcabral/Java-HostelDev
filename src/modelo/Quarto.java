@@ -3,30 +3,19 @@ package modelo;
 import java.util.ArrayList;
 
 public class Quarto {
-	private String id;
-	private String numero;
+	private int numero;
 	private ArrayList<Cama> camas = new ArrayList<Cama>();
 	
-	public Quarto(String id, String numero) {
+	public Quarto(int numero) {
 		super();
-		this.id = id;
 		this.numero = numero;
 	}
-	
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
@@ -57,6 +46,6 @@ public class Quarto {
 	
 	@Override
 	public String toString() {
-		return "Quarto [ id=" + id + ", numero=" + numero + ", camas=" + camas + "]";
+		return "Quarto [ numero=" + numero + ", camas=" + camas + "]";
 	}
 }

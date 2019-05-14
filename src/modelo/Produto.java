@@ -3,14 +3,14 @@ package modelo;
 import java.util.ArrayList;
 
 public class Produto {
-	private String id;
+	private int id;
 	private String nome;
 	private String descricao;
 	private double valor;
 	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
-	private ArrayList<String> idHospedagens = new ArrayList<String>();
+	private ArrayList<Integer> idHospedagens = new ArrayList<Integer>();
 	
-	public Produto(String id, String nome, String descricao, double valor) {
+	public Produto(int id, String nome, String descricao, double valor) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -42,11 +42,11 @@ public class Produto {
 		this.valor = valor;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -62,12 +62,12 @@ public class Produto {
 		this.hospedagens.remove(h);
 	}
 
-	public ArrayList<String> getIdHospedagens() {
+	public ArrayList<Integer> getIdHospedagens() {
 		return idHospedagens;
 	}
 
-	public void setIdHospedagens(String idHospedagens) {
-		this.idHospedagens.add(idHospedagens);
+	public void setIdHospedagens(int i) {
+		this.idHospedagens.add(i);
 	}
 
 	public void setHospedagens(ArrayList<Hospedagem> hospedagens) {

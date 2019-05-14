@@ -42,7 +42,7 @@ public class Fachada {
 		DAO.begin();	
 		Pessoa p = daopessoa.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar pessoa - pessoa ja cadastrada: " + nome);
+			throw new Exception("Cadastrar Pessoa - Pessoa ja cadastrada: " + nome);
 
 		p = new Pessoa(nome, telefone);
 		daopessoa.create(p);	
@@ -50,76 +50,107 @@ public class Fachada {
 		return p;
 	}	
 
-	public static Hospede cadastrarHospede(String id, String nome, String telefone) throws  Exception{
+	public static Hospede cadastrarHospede(String nome, String telefone) throws  Exception{
 		DAO.begin();	
-		Pessoa p = daopessoa.read(nome);
+		Pessoa p = daohospede.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar hospede - pessoa ja cadastrado:" + nome);
-
-		p = new Hospede(id, nome, telefone);
+			throw new Exception("Cadastrar Hospede - Hospede ja cadastrado:" + nome);
+		
+		int idCadastro;
+		List<Hospede> hospedes = daohospede.readAll();
+		if(hospedes.size() > 0) {
+			idCadastro = hospedes.get(hospedes.size() - 1 ).getId() + 1;
+		}else {
+			idCadastro = 1;
+		}
+		
+		p = new Hospede(idCadastro, nome, telefone);
 		daopessoa.create(p);	
 		DAO.commit();
 		return (Hospede) p;
 	}
 
-	public static Funcionario cadastrarFuncionario(String matricula, String nome, String telefone, double salario) throws  Exception{
+	public static Funcionario cadastrarFuncionario(String nome, String telefone, double salario) throws  Exception{
 		DAO.begin();	
-		Pessoa p = daopessoa.read(nome);
+		Pessoa p = daofuncionario.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar Funcionario - pessoa ja cadastrado:" + nome);
-
-		p = new Funcionario(nome, telefone, matricula, salario);
+			throw new Exception("Cadastrar Funcionario - Funcionario ja cadastrado:" + nome);
+		
+		int matCadastro;
+		List<Funcionario> funcionarios = daofuncionario.readAll();
+		if(funcionarios.size() > 0) {
+			matCadastro = funcionarios.get(funcionarios.size() - 1 ).getMatricula() + 1;
+		}else {
+			matCadastro = 100;
+		}
+		
+		p = new Funcionario(nome, telefone, matCadastro, salario);
 		daopessoa.create(p);	
 		DAO.commit();
 		return (Funcionario) p;
 	}
 	
-	public static Cama cadastrarCama(String id, String numero, String tipo) throws  Exception{
+	public static Cama cadastrarCama(int numero, String tipo) throws  Exception{
 		DAO.begin();	
-		Cama c = daocama.read(id);
+		Cama c = daocama.read(numero);
 		if(c != null)
-			throw new Exception("cadastrar Cama - Cama ja cadastrado:" + c);
+			throw new Exception("Cadastrar Cama - Cama ja cadastrada: " + c);
 
-		c = new Cama(id, numero, tipo);
+		c = new Cama(numero, tipo);
 		daocama.create(c);	
 		DAO.commit();
 		return (Cama) c;
 	}
 	
-	public static Quarto cadastrarQuarto(String id, String numero) throws  Exception{
+	public static Quarto cadastrarQuarto(int numero) throws  Exception{
 		DAO.begin();	
-		Quarto c = daoquarto.read(id);
+		Quarto c = daoquarto.read(numero);
 		if(c != null)
 			throw new Exception("cadastrar Quarto - Quarto ja cadastrado:" + c);
 
-		c = new Quarto(id, numero);
+		c = new Quarto(numero);
 		daoquarto.create(c);	
 		DAO.commit();
 		return (Quarto) c;
 	}
 
-	public static Produto cadastrarProduto(String id, String nome, String descricao, double valor) throws  Exception{
+	public static Produto cadastrarProduto(String nome, String descricao, double valor) throws  Exception{
 		DAO.begin();	
-		Produto p = daoproduto.read(id);
+		Produto p = daoproduto.read(nome);
 		if(p != null)
-			throw new Exception("cadastrar Produto - Produto ja cadastrado:" + p);
+			throw new Exception("Cadastrar Produto - Produto ja cadastrado:" + p);
 
-		p = new Produto(id, nome, descricao, valor);
+		int idCadastro;
+		List<Produto> produtos = daoproduto.readAll();
+		if(produtos.size() > 0) {
+			idCadastro = produtos.get(produtos.size() - 1 ).getId() + 1;
+		}else {
+			idCadastro = 500;
+		}
+		
+		p = new Produto(idCadastro, nome, descricao, valor);
 		daoproduto.create(p);	
 		DAO.commit();
 		return (Produto) p;
 	}
 	
-	public static Hospedagem cadastrarHospedagem(String id, String hospede, String funcionario, String quarto, String cama) throws  Exception{		
+	public static Hospedagem cadastrarHospedagem(String hospede, String funcionario, int quarto, int cama) throws  Exception{		
 		DAO.begin();	
-		Hospedagem h = daohospedagem.read(id);
 		
-		if(h != null)
-			throw new Exception("cadastrar Hospedagem - Hospedagem ja cadastrado:" + h);
-				
-		Hospede ho = daohospede.read(hospede);
-		if(ho == null)
-			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + ho);
+		Hospede hos = daohospede.read(hospede);
+		if(hos == null)
+			throw new Exception("cadastrar hospedagem - Hospede nao cadastrado!: " + hos);
+		
+		ArrayList<Hospedagem> hospedagens = hos.getHospedagens();
+		Boolean hospedagemAberta = false;
+		for(Hospedagem h : hospedagens) {
+			if(h.getStatusHospedagem() != hospedagemAberta) {
+				hospedagemAberta = h.getStatusHospedagem();
+			}
+		}
+		
+		if(hospedagemAberta != false) 
+			throw new Exception("cadastrar hospedagem - hospedagem aberta no sistema: " + hospedagemAberta);
 		
 		Funcionario f = daofuncionario.read(funcionario);
 		if(f == null)
@@ -133,26 +164,51 @@ public class Fachada {
 		if(c == null)
 			throw new Exception("cadastrar hospedagem - Cama nao cadastrado!: " + c);
 
-		h = new Hospedagem(id, ho, f, q, c);
-		ho.adicionarHospedagem(h);
-		ho.setIdHospedagens(h.getId());
+		int idCadastro;
+		List<Hospedagem> hospedagensCadastradas = daohospedagem.readAll();
+		if(hospedagensCadastradas.size() > 0) {
+			idCadastro = hospedagensCadastradas.get(hospedagensCadastradas.size() - 1 ).getId() + 1;
+		}else {
+			idCadastro = 1000;
+		}
+		
+		Hospedagem h = new Hospedagem(idCadastro, hos, f, q, c);
+		hos.adicionarHospedagem(h);
+		hos.setIdHospedagens(h.getId());
 
 		daohospedagem.create(h);	
 		DAO.commit();
 		return (Hospedagem) h;
 	}
 	
+	public static void fecharHospedagemDoHospede(String nomeHospede) throws Exception {
+		DAO.begin();	
+		Hospede hospede = daohospede.read(nomeHospede);
+		
+		if(hospede == null)
+			throw new Exception("fecharHospedagemDoHospede - hospede nao existe: " + hospede);
+	
+		ArrayList<Hospedagem> hospedagens = hospede.getHospedagens();
+		for(Hospedagem h : hospedagens) {
+			if(h.getStatusHospedagem() == true) {
+				h.setStatusHospedagem(false);
+				daohospedagem.update(h);
+				DAO.commit();
+			}
+		}
+	}
+	
 	//ADICIONAR 
 	
-	public static Cama adicionarCamaQuarto(String idCama, String idQuarto) throws Exception {
+	public static Cama adicionarCamaQuarto(int numeroCama, int numeroQuarto) throws Exception {
 		DAO.begin();
-		Cama c = daocama.read(idCama);
+		Cama c = daocama.read(numeroCama);
 		if(c == null)
-			throw new Exception("adicionar cama - cama nao cadastrada: " + idCama);
+			throw new Exception("adicionar cama - cama nao cadastrada: " + numeroCama);
 		
-		Quarto q = daoquarto.read(idQuarto);
+		Quarto q = daoquarto.read(numeroQuarto);
 		if(q == null)
-			throw new Exception("adicionar quarto - quarto nao cadastrado: " + idQuarto);
+			throw new Exception("adicionar quarto - quarto nao cadastrado: " + numeroQuarto);
 		
 		Quarto quartoAtual = c.getQuarto();
 		if(quartoAtual != null)
@@ -160,27 +216,27 @@ public class Fachada {
 		
 		q.adicionarCama(c);
 		c.setQuarto(q);
-		c.setNomeQuarto(q.getId());
+		c.setNumeroQuarto(q.getNumero());
 		daoquarto.update(q);
 		daocama.update(c);
 		DAO.commit();
 		return c;
 	}
 	
-	public static Cama excluirCamaQuarto(String idCama, String idQuarto) throws Exception {
+	public static Cama excluirCamaQuarto(int numeroCama, int numeroQuarto) throws Exception {
 		DAO.begin();
-		Cama c = daocama.read(idCama);
+		Cama c = daocama.read(numeroCama);
 		if(c == null)
-			throw new Exception("excluir cama quarto- cama nao cadastrada: " + idCama);
+			throw new Exception("excluir cama quarto- cama nao cadastrada: " + numeroCama);
 		
-		Quarto q = daoquarto.read(idQuarto);
+		Quarto q = daoquarto.read(numeroQuarto);
 		if(q == null)
-			throw new Exception("excluir cama quarto - quarto nao cadastrado: " + idQuarto);
+			throw new Exception("excluir cama quarto - quarto nao cadastrado: " + numeroQuarto);
 		
 		c = q.localizarCama(c);
 		
 		if(c == null)
-			throw new Exception("excluir cama quarto - quarto nao tem cama: " + q.getId());
+			throw new Exception("excluir cama quarto - quarto nao tem cama: " + q.getNumero());
 		
 		q.remover(c);
 		c.setQuarto(null);
@@ -189,7 +245,7 @@ public class Fachada {
 		return c;
 	}
 	
-	public static Produto adicionarProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
+	public static Produto adicionarProdutoHospedagem(String nomeProduto, int idHospedagem) throws Exception {
 		DAO.begin();
 		Hospedagem h = daohospedagem.read(idHospedagem);
 		if(h == null)
@@ -208,7 +264,7 @@ public class Fachada {
 		return p;
 	}
 	
-	public static Produto excluirProdutoHospedagem(String nomeProduto, String idHospedagem) throws Exception {
+	public static Produto excluirProdutoHospedagem(String nomeProduto, int idHospedagem) throws Exception {
 		DAO.begin();
 		Hospedagem h = daohospedagem.read(idHospedagem);
 		if(h == null)
@@ -254,13 +310,13 @@ public class Fachada {
 		DAO.commit();
 	}
 	
-	public static void alterarFuncionario(String nome, String novaMatricula, double novoSalario) throws Exception {
+	public static void alterarFuncionario(String nome, int novaMatricula, double novoSalario) throws Exception {
 		DAO.begin();
 		Funcionario funcionario = daofuncionario.read(nome);
 		if(funcionario==null)
 			throw new Exception("alterarFuncionario - inexistente: " + nome);
 		
-		if(novaMatricula != funcionario.getMatricula() && !novaMatricula.equals("")) {
+		if(novaMatricula != funcionario.getMatricula()) {
 			funcionario.setMatricula(novaMatricula);
 		}
 		if(novoSalario != funcionario.getSalario()) {
@@ -362,7 +418,7 @@ public class Fachada {
 	public static void excluirCamasDoQuarto(ArrayList<Cama> c, Quarto q) {
 		for(Cama cama : c) {
 			try {
-				excluirCamaQuarto(cama.getId(), q.getId());
+				excluirCamaQuarto(cama.getNumero(), q.getNumero());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

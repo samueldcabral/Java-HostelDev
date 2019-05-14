@@ -5,20 +5,29 @@ import java.util.ArrayList;
 
 public class Hospedagem {
 	private LocalDate dataCriacao = LocalDate.now();
-	private String id;
+	private int id;
 	private Hospede hospede;
 	private ArrayList<Produto> produtos = new ArrayList<Produto>();
 	private Funcionario funcionario;
 	private Quarto quarto;
 	private Cama cama;
+	private Boolean statusHospedagem = true;
 	
-	public Hospedagem(String id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) {
+	public Hospedagem(int id, Hospede hospede, Funcionario funcionario, Quarto quarto, Cama cama) {
 		super();
 		this.id = id;
 		this.hospede = hospede;
 		this.funcionario = funcionario;
 		this.quarto = quarto;
 		this.cama = cama;
+	}
+
+	public Boolean getStatusHospedagem() {
+		return statusHospedagem;
+	}
+
+	public void setStatusHospedagem(Boolean statusHospedagem) {
+		this.statusHospedagem = statusHospedagem;
 	}
 
 	public LocalDate getDataCriacao() {
@@ -29,11 +38,11 @@ public class Hospedagem {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -57,7 +66,6 @@ public class Hospedagem {
 		this.produtos.remove(p);
 	}
 	
-
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}

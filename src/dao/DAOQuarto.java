@@ -15,10 +15,10 @@ public class DAOQuarto  extends DAO<Quarto>{
 
 	//Leitura POR id 
 	public Quarto read (Object chave) {
-		String id = (String) chave;
+		int id = (Integer) chave;
 		Query q = manager.query();
 		q.constrain(Quarto.class);
-		q.descend("id").constrain(id);
+		q.descend("numero").constrain(id);
 		List<Quarto> resultados = q.execute();
 		if (resultados.size()>0)
 			return resultados.get(0);

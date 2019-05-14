@@ -1,21 +1,21 @@
 package modelo;
 
 public class Funcionario extends Pessoa {
-	private String matricula;
+	private int matricula;
 	private double salario;
 	
-	public Funcionario(String nome, String telefone, String matricula, double salario) {
+	public Funcionario(String nome, String telefone, int matricula, double salario) {
 		super(nome, telefone);
 		
 		this.matricula = matricula;
 		this.salario = salario;
 	}
 
-	public String getMatricula() {
+	public int getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(String matricula) {
+	public void setMatricula(int matricula) {
 		this.matricula = matricula;
 	}
 

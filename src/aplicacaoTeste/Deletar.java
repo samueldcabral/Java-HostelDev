@@ -8,7 +8,7 @@ public class Deletar {
 		try {
 			System.out.println("deletando...");
 //			Fachada.excluirHospede("Barbara Lucia");
-			Fachada.excluirProdutoHospedagem("Coca-Cola", "1");
+			Fachada.excluirProdutoHospedagem("Coca-Cola", 1);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

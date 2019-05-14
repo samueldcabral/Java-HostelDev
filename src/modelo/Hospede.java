@@ -3,23 +3,21 @@ package modelo;
 import java.util.ArrayList;
 
 public class Hospede extends Pessoa{
-	private String id;
+	private int id;
 	private ArrayList<Hospedagem> hospedagens = new ArrayList<Hospedagem>();
-	private ArrayList<String> idHospedagens = new ArrayList<String>();
+	private ArrayList<Integer> idHospedagens = new ArrayList<Integer>();
 	
-
-
-	public Hospede(String id, String nome, String telefone) {
+	public Hospede(int id, String nome, String telefone) {
 		super(nome, telefone);
 		// TODO Auto-generated constructor stub
 		this.id = id;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -39,11 +37,11 @@ public class Hospede extends Pessoa{
 		this.hospedagens.remove(h);
 	}
 	
-	public ArrayList<String> getIdHospedagens() {
+	public ArrayList<Integer> getIdHospedagens() {
 		return idHospedagens;
 	}
 
-	public void setIdHospedagens(String idHospedagens) {
+	public void setIdHospedagens(int idHospedagens) {
 		this.idHospedagens.add(idHospedagens);
 	}
 	
