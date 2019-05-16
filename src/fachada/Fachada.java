@@ -604,7 +604,7 @@ public class Fachada {
 		if(hospede == null)
 			throw new Exception("consultarFuncionarioCadastrouHospede - hospede nao existe: " + nomeHospede);
 		
-		System.out.println("hospede eh => " + hospede.getNome() + "   " + hospede.getHospedagens());
+		System.out.println("hospede eh => " + hospede.getNome());
 		ArrayList<Hospedagem> hospedagens = hospede.getHospedagens();
 		ArrayList<String> nomesFuncionarios = new ArrayList<String>();
 		

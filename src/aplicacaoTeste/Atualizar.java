@@ -8,9 +8,20 @@ public class Atualizar {
 	public Atualizar(){
 		Fachada.inicializar();
 		try {
-			System.out.println("alterando...");
-			Fachada.alterarPessoa("Allana Sueli da Paz", "Skywalker Sueli da Paz");
-
+			System.out.println("alterando pessoa: nome...");
+			Fachada.alterarPessoa("Barbara Lucia", "Lucia Barbara");
+			Fachada.alterarPessoa("Leila Ribeiro Almeida", "Thalia R. Almeida");
+			
+			System.out.println("alterando funcionario: salario e matricula...");
+			Fachada.alterarFuncionario("Joao Giovanni Tomas da Mota", 111, 3000);
+			Fachada.alterarFuncionario("Julia Marli Marcia", 222, 3300);
+			
+			System.out.println("alterando produto: nome, desc e valor...");
+			Fachada.alterarProduto("Cha", "Cha Camomila", "Bebida Quente", 2.2);
+			Fachada.alterarProduto("Itaipava", "Itaipava premium", "Cerveja Nacional", 5.0);
+			Fachada.alterarProduto("Salgadinhos Diversos", "Tapioquinha frita", "Salgados", 4.1);
+			Fachada.alterarProduto("Lasanha Frango", "Lasanha lombo", "Lasanha", 10.0);
+			
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -16,8 +16,14 @@ public class Consultar {
 //			System.out.println(Fachada.consultarPessoaPorNumero("88889999") );
 //			System.out.println(Fachada.consultarTelefonesPorNome("joana") );
 //			System.out.println(Fachada.consultarTelefonesPorPrefixo("87") );
+			
+			System.out.println("\n\nconsultar Produtos de Todas Hospedagens do Hospede\n");
 			System.out.println(Fachada.consultarProdutosDeTodasHospedagensDoHospede("Alice Sara"));
+			
+			System.out.println("\n\nconsultar Valor Gasto Por Produtos\n");
 			System.out.println(Fachada.consultarValorGastoPorProdutosNaHospedagemHospede("Vicente Benício Santos"));
+
+			System.out.println("\n\nconsultar Funcionario Cadastrou Hospede\n");
 			System.out.println(Fachada.consultarFuncionarioCadastrouHospede("Vicente Benício Santos"));
 
 		} catch (Exception e) {
