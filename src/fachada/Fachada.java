@@ -226,7 +226,7 @@ public class Fachada {
 		return c;
 	}
 	
-	public static Cama excluirCamaQuarto(int numeroCama, int numeroQuarto) throws Exception {
+	public static void excluirCamaQuarto(int numeroCama, int numeroQuarto) throws Exception {
 		DAO.begin();
 		Cama c = daocama.read(numeroCama);
 		if(c == null)
@@ -245,7 +245,6 @@ public class Fachada {
 		c.setQuarto(null);
 		daoquarto.update(q);
 		DAO.commit();
-		return c;
 	}
 	
 	public static Produto adicionarProdutoHospedagem(String nomeProduto, int idHospedagem) throws Exception {
@@ -360,7 +359,7 @@ public class Fachada {
 		DAO.commit();
 	}
 	
-	public static void excluirCama(String id) throws Exception {
+	public static void excluirCama(int id) throws Exception {
 		DAO.begin();
 		Cama c = daocama.read(id);
 		if(c==null)
@@ -412,13 +411,16 @@ public class Fachada {
 		ArrayList<Cama> c = q.getCamas();
 		
 		if(c.size() > 0) {
-			excluirCamasDoQuarto(c, q);
+			excluirCamasDoQuarto(q.getNumero());
 		}
 		daoquarto.delete(q);
 		DAO.commit();
 	}
 	
-	public static void excluirCamasDoQuarto(ArrayList<Cama> c, Quarto q) {
+	public static void excluirCamasDoQuarto(int idQuarto) {
+		Quarto q = daoquarto.read(idQuarto);
+		ArrayList<Cama> c = q.getCamas();
+		
 		for(Cama cama : c) {
 			try {
 				excluirCamaQuarto(cama.getNumero(), q.getNumero());
@@ -613,5 +615,20 @@ public class Fachada {
 			nomesFuncionarios.add(hos.getFuncionario().getNome());
 		}
 		return nomesFuncionarios;
+	}
+	
+	public static List<Hospede> consultarHospedePorQuarto(int produto) {
+		List<Hospede> h = daohospede.consultarHospedePorQuarto(produto);
+		return h;
+	}
+	
+	public static List<Hospede> consultarHospedePorProduto(String produto) {
+		List<Hospede> h = daohospede.consultarHospedePorProduto(produto);
+		return h;
+	}
+	
+	public static List<Produto> consultarProdutosPorHospede(String hospede) {
+		List<Produto> h = daoproduto.consultarProdutosPorHospede(hospede);
+		return h;
 	}
 }

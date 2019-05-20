@@ -7,8 +7,10 @@ import java.util.List;
 //import com.db4o.query.Evaluation;
 import com.db4o.query.Query;
 
+import modelo.Hospedagem;
 import modelo.Hospede;
 import modelo.Pessoa;
+import modelo.Produto;
 
 public class DAOHospede  extends DAO<Hospede>{
 
@@ -62,6 +64,35 @@ public class DAOHospede  extends DAO<Hospede>{
 			return null;
 	}
 	
+//	--------------------------------------
+//	---- MINHAS CONSULTAS ---
+	public List<Hospede> consultarHospedePorQuarto(Object chave) {
+		//String nome = (String) chave;
+		int id = (Integer) chave;
+		Query q = manager.query();
+		q.constrain(Hospede.class);
+		q.descend("hospedagens").descend("quarto").descend("numero").constrain(id);
+		List<Hospede> resultados = q.execute();
+		
+		if (resultados.size()>0)
+			return resultados;
+		else
+			return null;
+	}
+	
+	public List<Hospede> consultarHospedePorProduto(Object chave) {
+		String nome = (String) chave;
+		//int id = (Integer) chave;
+		Query q = manager.query();
+		q.constrain(Hospede.class);
+		q.descend("hospedagens").descend("produtos").descend("nome").constrain(nome);
+		List<Hospede> resultados = q.execute();
+		
+		if (resultados.size()>0)
+			return resultados;
+		else
+			return null;
+	}
 }
 
 

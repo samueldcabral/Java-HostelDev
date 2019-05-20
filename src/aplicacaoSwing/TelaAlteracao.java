@@ -337,7 +337,7 @@ public class TelaAlteracao {
 						String idCama = textField_1.getText();
 
 						if(!idCama.isEmpty()) {
-							Fachada.excluirCama(idCama);
+							Fachada.excluirCama(Integer.parseInt(idCama));
 							label6.setText("Resultado: Exclusao concluido");
 						}else {
 							label6.setText("Resultado: Erro! Exclusao nao realizado");

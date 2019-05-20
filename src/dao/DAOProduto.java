@@ -25,7 +25,17 @@ public class DAOProduto  extends DAO<Produto>{
 			return null;
 	}
 
-
+	public List<Produto> consultarProdutosPorHospede (Object chave) {
+		String nome = (String) chave;
+		Query q = manager.query();
+		q.constrain(Produto.class);
+		q.descend("hospedagens").descend("hospede").descend("nome").constrain(nome);
+		List<Produto> resultados = q.execute();
+		if (resultados.size()>0)
+			return resultados;
+		else
+			return null;
+	}
 	/**********************************************************
 	 * 
 	 * TODAS AS CONSULTAS DE PRODUTO

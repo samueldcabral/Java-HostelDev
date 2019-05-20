@@ -92,8 +92,10 @@ public class Hospedagem {
 
 	@Override
 	public String toString() {
-		return "Hospedagem [dataCriacao=" + dataCriacao + ", id=" + id + ", hospede=" + hospede + ", produtos="
-				+ produtos + ", funcionario=" + funcionario + ", quarto=" + quarto + ", cama=" + cama + "]";
+		return "id= " + id + ", dataCriacao= " + dataCriacao + ", hospede= " + hospede.getNome() + ", funcionario= " + 
+			funcionario.getNome() + ", quarto= " + quarto.getNumero() + ", cama= " + cama.getNumero() +
+				 "\nprodutos= " + produtos;
+		
 	}
 
 	
