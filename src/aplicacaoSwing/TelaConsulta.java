@@ -2,6 +2,7 @@ package aplicacaoSwing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
 import fachada.Fachada;
+import modelo.Hospede;
 import modelo.Produto;
 import java.awt.Font;
 
@@ -20,8 +22,8 @@ public class TelaConsulta extends JFrame {
 	private JPanel contentPane;
 	private JTextArea textArea;
 	private JButton btnCriar;
-	private JButton btnProdHospede;
-	private JButton btnValorTotalemProdutos;
+	private JButton btnHospedeQuarto;
+	private JButton btnHospedePorProdutos;
 
 
 	public TelaConsulta() {
@@ -58,20 +60,20 @@ public class TelaConsulta extends JFrame {
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		contentPane.add(scroll);
 		
-		btnProdHospede = new JButton("Listar todos produtos do hospede");
-		btnProdHospede.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnProdHospede.addActionListener(new ActionListener() {
+		btnHospedeQuarto = new JButton("Consultar Hospedes por Quarto");
+		btnHospedeQuarto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnHospedeQuarto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String nomeHospede = JOptionPane.showInputDialog("Digite o nome do Hospede: ");
-					ArrayList<Produto> prods = Fachada.consultarProdutosDeTodasHospedagensDoHospede(nomeHospede);
+					String numero = JOptionPane.showInputDialog("Digite o numero do quarto: ");
+					List<Hospede> hospedes = Fachada.consultarHospedePorQuarto(Integer.parseInt(numero));
 					String textoFinal = "";
 					
-					for(Produto p : prods) {
-						textoFinal += p.getNome() + " : " + p.getDescricao() + " : " + p.getValor() + "\n\n";
+					for(Hospede h : hospedes) {
+						textoFinal += h.getNome() + " com telefone " + h.getTelefone() + " ficou no quarto " + numero + "\n\n";
 					}
 					
-					if(textoFinal.equals("")) {
+					if(!textoFinal.equals("")) {
 						textArea.setText(textoFinal);
 					}else {
 						textArea.setText("Consulta vazia");
@@ -84,44 +86,66 @@ public class TelaConsulta extends JFrame {
 			}
 		});
 		
-		btnProdHospede.setBounds(648, 93, 272, 23);
-		contentPane.add(btnProdHospede);
+		btnHospedeQuarto.setBounds(648, 93, 272, 32);
+		contentPane.add(btnHospedeQuarto);
 		
-		btnValorTotalemProdutos = new JButton("Valor total em produtos por hospede");
-		btnValorTotalemProdutos.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnValorTotalemProdutos.addActionListener(new ActionListener() {
+		btnHospedePorProdutos = new JButton("Consultar Hospedes por produtos");
+		btnHospedePorProdutos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnHospedePorProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nomeHospede = JOptionPane.showInputDialog("Digite o nome do Hospede: ");
 				try {
-					textArea.setText(Fachada.consultarValorGastoPorProdutosNaHospedagemHospede(nomeHospede) + "");
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null,e1.getMessage());
-				}
-			}
-		});
-		btnValorTotalemProdutos.setBounds(648, 171, 272, 32);
-		contentPane.add(btnValorTotalemProdutos);
-		
-		JButton btnFuncCadastrouHosp = new JButton("Funcionario Cadastrou o hospede");
-		btnFuncCadastrouHosp.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnFuncCadastrouHosp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nomeHospede = JOptionPane.showInputDialog("Digite o nome do Hospede: ");
-				try {
-					ArrayList<String> funcs = Fachada.consultarFuncionarioCadastrouHospede(nomeHospede);
+					String nomeProduto = JOptionPane.showInputDialog("Digite o nome do Produto: ");
+					List<Hospede> hospedes = Fachada.consultarHospedePorProduto(nomeProduto);
 					String textoFinal = "";
 					
-					for(String str : funcs) {
-						textoFinal += str;
+					for(Hospede h : hospedes) {
+						textoFinal += h.getNome() + " com telefone " + h.getTelefone() + " consumiu " + nomeProduto + "\n\n";
 					}
-					textArea.setText(textoFinal);
+					
+					if(!textoFinal.equals("")) {
+						textArea.setText(textoFinal);
+					}else {
+						textArea.setText("Consulta vazia");
+					}
+					
+					
+					
+					
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());
 				}
 			}
 		});
-		btnFuncCadastrouHosp.setBounds(648, 259, 272, 32);
-		contentPane.add(btnFuncCadastrouHosp);
+		btnHospedePorProdutos.setBounds(648, 171, 272, 32);
+		contentPane.add(btnHospedePorProdutos);
+		
+		JButton btnProdutosPorHospede = new JButton("Consultar produto por hospede");
+		btnProdutosPorHospede.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnProdutosPorHospede.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String nomeHospede = JOptionPane.showInputDialog("Digite o nome do Hospede: ");
+					List<Produto> produtos = Fachada.consultarProdutosPorHospede(nomeHospede);
+					String textoFinal = "";
+					
+					for(Produto p : produtos) {
+						textoFinal += p.getNome() + " com valor " + p.getValor() + " foi consumido por " + nomeHospede + "\n\n";
+					}
+					
+					if(!textoFinal.equals("")) {
+						textArea.setText(textoFinal);
+					}else {
+						textArea.setText("Consulta vazia");
+					}
+					
+
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+				}
+			}
+		});
+		btnProdutosPorHospede.setBounds(648, 259, 272, 32);
+		contentPane.add(btnProdutosPorHospede);
 		
 		
 	}

@@ -617,12 +617,18 @@ public class Fachada {
 		return nomesFuncionarios;
 	}
 	
-	public static List<Hospede> consultarHospedePorQuarto(int produto) {
-		List<Hospede> h = daohospede.consultarHospedePorQuarto(produto);
+	public static List<Hospede> consultarHospedePorQuarto(int numeroQuarto) throws Exception{
+		Quarto q = daoquarto.read(numeroQuarto);
+		if(q==null) throw new Exception("Quarto não existe: " + numeroQuarto);
+		
+		List<Hospede> h = daohospede.consultarHospedePorQuarto(q.getNumero());
 		return h;
 	}
 	
-	public static List<Hospede> consultarHospedePorProduto(String produto) {
+	public static List<Hospede> consultarHospedePorProduto(String produto) throws Exception {
+		Produto p = daoproduto.read(produto);
+		if(p==null) throw new Exception("Produto não existe: " + produto);
+		
 		List<Hospede> h = daohospede.consultarHospedePorProduto(produto);
 		return h;
 	}

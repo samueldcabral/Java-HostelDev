@@ -29,8 +29,8 @@ public class Consultar {
 //			System.out.println("\n\nconsultar Pessoa por telefone");
 //			System.out.println(Fachada.consultarPessoaPorNumero("89-99436-1257"));
 //			
-//			System.out.println(Fachada.consultarHospedePorQuarto(202));
-//			System.out.println(Fachada.consultarHospedePorProduto("Heineken"));
+			System.out.println(Fachada.consultarHospedePorQuarto(202));
+			System.out.println(Fachada.consultarHospedePorProduto("Heineken"));
 			System.out.println(Fachada.consultarProdutosPorHospede("Julian Oliveira Almeida"));
 			
 		} catch (Exception e) {
