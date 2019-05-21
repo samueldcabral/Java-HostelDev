@@ -4,4 +4,4 @@
 
 ## Screenshot
 
-[https://i.imgur.com/Tg13SBV.png](HostelDev)
+![HostelDev App Page](https://i.imgur.com/Tg13SBV.png "Hostel Dev Screen")
